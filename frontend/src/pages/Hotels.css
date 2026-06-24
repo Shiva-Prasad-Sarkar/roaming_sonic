@@ -580,7 +580,7 @@
 
 @media (max-width: 768px) {
   .hotels-header {
-    padding: 72px 16px 36px;
+    padding: 20px 16px 32px;
   }
 
   .hotels-header h1 {
@@ -672,7 +672,7 @@
 
 @media (max-width: 480px) {
   .hotels-header {
-    padding: 68px 12px 28px;
+    padding: 16px 12px 24px;
   }
 
   .hotels-header h1 {

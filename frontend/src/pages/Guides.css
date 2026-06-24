@@ -713,7 +713,7 @@
 
 @media (max-width: 768px) {
   .guides-header {
-    padding: 72px 16px 36px;
+    padding: 20px 16px 32px;
   }
 
   .guides-header h1 {
@@ -831,7 +831,7 @@
 
 @media (max-width: 480px) {
   .guides-header {
-    padding: 68px 12px 28px;
+    padding: 16px 12px 24px;
   }
 
   .guides-header h1 {

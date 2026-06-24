@@ -213,8 +213,7 @@ code {
   .guides-page,
   .group-tours-page,
   .dashboard-container,
-  .auth-container,
-  .payment-form-container {
+  .auth-container {
     overflow-x: hidden;
     width: 100vw;
     box-sizing: border-box;
@@ -429,34 +428,43 @@ code {
 
   .tours-header,
   .hotels-header,
+  .buses-header,
   .guides-header,
+  .group-tours-header,
   .legal-header {
-    padding: 20px 16px 32px;
+    margin-top: 0 !important;
+    margin-bottom: 10px !important;
+    padding: 16px 16px 20px !important;
   }
 
   .tours-header h1,
   .hotels-header h1,
+  .buses-header h1,
   .guides-header h1,
+  .group-tours-header h1,
   .legal-header h1 {
-    font-size: 1.9rem;
+    font-size: 1.6rem;
     line-height: 1.2;
+    margin-bottom: 6px;
   }
 
   .tours-header p,
   .hotels-header p,
+  .buses-header p,
   .guides-header p,
+  .group-tours-header p,
   .legal-header p {
-    font-size: 0.98rem;
+    font-size: 0.9rem;
     opacity: 0.9;
   }
 
+  /* Hide in-header nav buttons on mobile — bottom tab bar handles navigation */
   .tours-header .header-nav,
   .hotels-header .header-nav,
-  .guides-header .header-nav {
-    position: static;
-    justify-content: center;
-    flex-wrap: wrap;
-    margin-bottom: 14px;
+  .buses-header .header-nav,
+  .guides-header .header-nav,
+  .group-tours-header .header-nav {
+    display: none;
   }
 
   .container,

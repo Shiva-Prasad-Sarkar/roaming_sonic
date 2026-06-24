@@ -1006,8 +1006,8 @@ const TouristDashboard = () => {
                 background: '#f0f0f0'
               }}>
                 {profile?.photo && profile.photo !== 'default-avatar.png' ? (
-                  <img 
-                    src={`${BASE_URL}${profile.photo}`} 
+                  <img
+                    src={profile.photo?.startsWith('http') ? profile.photo : `${BASE_URL}${profile.photo}`}
                     alt={profile.name}
                     style={{width: '100%', height: '100%', objectFit: 'cover'}}
                   />
@@ -1561,8 +1561,8 @@ const TouristDashboard = () => {
               {profile.wishlist.map((hotel) => (
                 <div key={hotel._id} className="wishlist-item">
                   {hotel.photos && hotel.photos.length > 0 ? (
-                    <img 
-                      src={`${BASE_URL}${hotel.photos[0].url}`} 
+                    <img
+                      src={hotel.photos[0].url?.startsWith('http') ? hotel.photos[0].url : `${BASE_URL}${hotel.photos[0].url}`}
                       alt={hotel.name}
                       style={{
                         width: '100%',

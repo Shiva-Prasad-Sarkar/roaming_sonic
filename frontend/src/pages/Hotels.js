@@ -30,6 +30,7 @@ const Hotels = () => {
   const [showReviewModal, setShowReviewModal] = useState(false);
   const [reviewHotel, setReviewHotel] = useState(null);
   const [reviewData, setReviewData] = useState({ rating: 5, comment: '' });
+  const [showFilters, setShowFilters] = useState(false);
   const [filters, setFilters] = useState({
     city: '',
     division: '',
@@ -104,6 +105,7 @@ const Hotels = () => {
   const handleSearch = (e) => {
     e.preventDefault();
     fetchHotels();
+    setShowFilters(false);
   };
 
   const resetFilters = () => {
@@ -279,7 +281,11 @@ const Hotels = () => {
       </div>
 
       <div className="hotels-content container">
-        <aside className="filters-sidebar">
+        <button className="mobile-filter-toggle" onClick={() => setShowFilters(f => !f)}>
+          {showFilters ? '✕ Close Filters' : '🔍 Filter Hotels'}
+        </button>
+
+        <aside className={`filters-sidebar${showFilters ? ' filters-open' : ''}`}>
           <div className="filters-header">
             <h3>🔍 Filter Hotels</h3>
           </div>
@@ -365,12 +371,12 @@ const Hotels = () => {
               {hotels.map(hotel => (
                 <div key={hotel._id} className="hotel-card">
                   <div className="hotel-image" onClick={() => hotel.photos && hotel.photos.length > 0 && openPhotoGallery(hotel)} style={{cursor: hotel.photos && hotel.photos.length > 0 ? 'pointer' : 'default'}}>
-                    <img 
+                    <img
                       src={
-                        hotel.photos && hotel.photos.length > 0 
-                          ? `${BASE_URL}${hotel.photos[0].url}` 
+                        hotel.photos && hotel.photos.length > 0
+                          ? (hotel.photos[0].url?.startsWith('http') ? hotel.photos[0].url : `${BASE_URL}${hotel.photos[0].url}`)
                           : 'https://via.placeholder.com/400x250?text=No+Image'
-                      } 
+                      }
                       alt={hotel.name}
                       onError={(e) => {
                         e.target.onerror = null;
@@ -598,8 +604,8 @@ const Hotels = () => {
                   boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
                   transition: 'transform 0.3s ease'
                 }}>
-                  <img 
-                    src={`${BASE_URL}${photo.url}`}
+                  <img
+                    src={photo.url?.startsWith('http') ? photo.url : `${BASE_URL}${photo.url}`}
                     alt={photo.caption || `Photo ${index + 1}`}
                     style={{
                       width: '100%',

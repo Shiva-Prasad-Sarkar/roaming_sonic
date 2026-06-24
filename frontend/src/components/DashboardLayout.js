@@ -11,6 +11,10 @@ const DashboardLayout = ({ children }) => {
   const navigate = useNavigate();
   const [sidebarOpen, setSidebarOpen] = useState(true);
 
+  const closeSidebarOnMobile = () => {
+    if (window.innerWidth <= 768) setSidebarOpen(false);
+  };
+
   const handleLogout = () => {
     logout();
     navigate('/login');
@@ -108,7 +112,7 @@ const DashboardLayout = ({ children }) => {
         <div className="user-info">
           <div className="user-avatar">
             {user?.photo && user.photo !== 'default-avatar.png' ? (
-              <img src={`${BASE_URL}${user.photo}`} alt={user?.name} style={{width: '100%', height: '100%', objectFit: 'cover'}} />
+              <img src={user.photo?.startsWith('http') ? user.photo : `${BASE_URL}${user.photo}`} alt={user?.name} style={{width: '100%', height: '100%', objectFit: 'cover'}} />
             ) : (
               <div className="avatar-placeholder">
                 {user?.name?.charAt(0).toUpperCase()}
@@ -129,6 +133,7 @@ const DashboardLayout = ({ children }) => {
               key={index}
               to={item.path}
               className="nav-item"
+              onClick={closeSidebarOnMobile}
             >
               <span className="nav-icon">{item.icon}</span>
               {sidebarOpen && <span className="nav-label">{item.label}</span>}
@@ -141,11 +146,11 @@ const DashboardLayout = ({ children }) => {
             <span className="nav-icon">{theme === 'light' ? '🌙' : '☀️'}</span>
             {sidebarOpen && <span className="nav-label">{theme === 'light' ? 'Dark Mode' : 'Light Mode'}</span>}
           </button>
-          <Link to="/" className="nav-item">
+          <Link to="/" className="nav-item" onClick={closeSidebarOnMobile}>
             <span className="nav-icon">🏠</span>
             {sidebarOpen && <span className="nav-label">Home</span>}
           </Link>
-          <button onClick={handleLogout} className="nav-item logout-btn">
+          <button onClick={() => { closeSidebarOnMobile(); handleLogout(); }} className="nav-item logout-btn">
             <span className="nav-icon">🚪</span>
             {sidebarOpen && <span className="nav-label">Logout</span>}
           </button>

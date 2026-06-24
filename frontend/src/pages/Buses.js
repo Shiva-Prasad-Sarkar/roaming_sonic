@@ -37,6 +37,7 @@ const Buses = () => {
     rating: 5,
     comment: ''
   });
+  const [showFilters, setShowFilters] = useState(false);
   const [filters, setFilters] = useState({
     from: '',
     to: '',
@@ -95,6 +96,7 @@ const Buses = () => {
   const handleSearch = (e) => {
     e.preventDefault();
     fetchBuses();
+    setShowFilters(false);
   };
 
   const resetFilters = () => {
@@ -345,7 +347,11 @@ const Buses = () => {
       </div>
 
       <div className="buses-content container">
-        <aside className="filters-sidebar">
+        <button className="mobile-filter-toggle" onClick={() => setShowFilters(f => !f)}>
+          {showFilters ? '✕ Close Filters' : '🔍 Search Buses'}
+        </button>
+
+        <aside className={`filters-sidebar${showFilters ? ' filters-open' : ''}`}>
           <div className="filters-header">
             <h3>🔍 Search Buses</h3>
           </div>

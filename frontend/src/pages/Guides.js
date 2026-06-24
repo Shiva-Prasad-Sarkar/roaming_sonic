@@ -24,6 +24,7 @@ const Guides = () => {
     numberOfPeople: 1,
     message: ''
   });
+  const [showFilters, setShowFilters] = useState(false);
   const [filters, setFilters] = useState({
     language: '',
     specialization: '',
@@ -95,6 +96,7 @@ const Guides = () => {
   const handleSearch = (e) => {
     e.preventDefault();
     fetchGuides();
+    setShowFilters(false);
   };
 
   const resetFilters = () => {
@@ -196,7 +198,11 @@ const Guides = () => {
       </div>
 
       <div className="guides-content container">
-        <aside className="filters-sidebar">
+        <button className="mobile-filter-toggle" onClick={() => setShowFilters(f => !f)}>
+          {showFilters ? '✕ Close Filters' : '🔍 Filter Guides'}
+        </button>
+
+        <aside className={`filters-sidebar${showFilters ? ' filters-open' : ''}`}>
           <div className="filters-header">
             <h3>🔍 Filter Guides</h3>
           </div>
@@ -321,7 +327,7 @@ const Guides = () => {
                   <div className="guide-header">
                     <div className="guide-avatar">
                       {guide.photo && guide.photo !== 'default-avatar.png' ? (
-                        <img src={`${BASE_URL}${guide.photo}`} alt={guide.name} className="avatar-image" />
+                        <img src={guide.photo?.startsWith('http') ? guide.photo : `${BASE_URL}${guide.photo}`} alt={guide.name} className="avatar-image" />
                       ) : (
                         <div className="avatar-circle">{guide.name?.charAt(0) || 'G'}</div>
                       )}

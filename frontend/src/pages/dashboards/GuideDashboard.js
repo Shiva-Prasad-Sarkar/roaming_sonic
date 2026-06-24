@@ -412,8 +412,8 @@ const GuideDashboard = () => {
             background: '#f0f0f0'
           }}>
             {profile?.photo && profile.photo !== 'default-avatar.png' ? (
-              <img 
-                src={`${BASE_URL}${profile.photo}`} 
+              <img
+                src={profile.photo?.startsWith('http') ? profile.photo : `${BASE_URL}${profile.photo}`}
                 alt={profile.name}
                 style={{width: '100%', height: '100%', objectFit: 'cover'}}
               />

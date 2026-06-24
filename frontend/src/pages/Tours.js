@@ -15,6 +15,7 @@ const Tours = () => {
   const [tours, setTours] = useState([]);
   const [filteredTours, setFilteredTours] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [showFilters, setShowFilters] = useState(false);
   const [filters, setFilters] = useState({
     category: '',
     difficulty: '',
@@ -276,8 +277,12 @@ const Tours = () => {
       </div>
 
       <div className="tours-container">
+        <button className="mobile-filter-toggle" onClick={() => setShowFilters(f => !f)}>
+          {showFilters ? '✕ Close Filters' : '🔍 Filter Tours'}
+        </button>
+
         <div className="tours-sidebar">
-          <div className="filter-section">
+          <div className={`filter-section${showFilters ? ' filters-open' : ''}`}>
             <h3>Filters</h3>
             
             <div className="filter-group">
@@ -353,8 +358,11 @@ const Tours = () => {
               </label>
             </div>
 
-            <button type="button" className="reset-btn-small" onClick={resetFilters}>
+            <button type="button" className="reset-btn-small" onClick={() => { resetFilters(); setShowFilters(false); }}>
               Reset Filters
+            </button>
+            <button type="button" className="search-btn" style={{marginTop: '8px'}} onClick={() => setShowFilters(false)}>
+              Apply Filters
             </button>
           </div>
         </div>

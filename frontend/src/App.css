@@ -673,6 +673,44 @@ code {
   }
 }
 
+/* ─── Mobile filter toggle button ───────────────────────────────────────── */
+
+.mobile-filter-toggle {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  /* Show the toggle button, hide the sidebar by default */
+  .mobile-filter-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+    padding: 12px 16px;
+    margin-bottom: 12px;
+    background: linear-gradient(135deg, #4ecdc4 0%, #ff6b6b 100%);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    touch-action: manipulation;
+  }
+
+  .filters-sidebar,
+  .filter-section {
+    display: none;
+  }
+
+  .filters-sidebar.filters-open,
+  .filter-section.filters-open {
+    display: block;
+    margin-bottom: 16px;
+  }
+}
+
 /* ─── Bottom tab bar clearance on mobile ─────────────────────────────────── */
 @media (max-width: 768px) {
   /* All page wrappers get extra bottom space so content doesn't hide under the fixed tab bar */

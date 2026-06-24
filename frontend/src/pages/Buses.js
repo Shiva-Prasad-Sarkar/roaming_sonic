@@ -63,14 +63,15 @@ const Buses = () => {
     }
   }, [filters]);
 
-  const fetchBuses = async () => {
+  const fetchBuses = async (dateOverride = null) => {
     try {
       setLoading(true);
       const queryParams = new URLSearchParams();
-      
+
       if (filters.from) queryParams.append('from', filters.from);
       if (filters.to) queryParams.append('to', filters.to);
-      if (filters.date) queryParams.append('date', filters.date);
+      const dateForQuery = dateOverride || filters.date;
+      if (dateForQuery) queryParams.append('date', dateForQuery);
       if (filters.busType) queryParams.append('busType', filters.busType);
       if (filters.minFare) queryParams.append('minFare', filters.minFare);
       if (filters.maxFare) queryParams.append('maxFare', filters.maxFare);
@@ -291,7 +292,7 @@ const Buses = () => {
       setBookedSeats([]); // Clear booked seats cache
       setAvailableSeats([]); // Clear available seats cache
       setShowBookingModal(false);
-      fetchBuses(); // Refresh to update available seats
+      fetchBuses(bookingData.travelDate); // Refresh with the booked date so seat count updates correctly
     } catch (error) {
       console.error('Booking error:', error);
       console.error('Error response:', error.response?.data);

@@ -383,9 +383,13 @@
 
   .form-actions {
     flex-direction: column;
+    gap: 10px;
   }
 
   .form-actions button {
     width: 100%;
+    box-sizing: border-box;
+    padding: 14px 16px;
+    font-size: 15px;
   }
 }

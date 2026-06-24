@@ -55,9 +55,7 @@ const couponsData = [
   { code: 'GUIDE50', description: 'Guide booking special - ৳50 off', discountType: 'fixed', discountValue: 50, serviceTypes: ['guide'], minPurchaseAmount: 300, validFrom: new Date('2026-01-01'), validTo: new Date('2026-12-31'), isActive: true }
 ];
 
-// POST /api/seed  — protected by SEED_SECRET env variable
-router.post('/', async (req, res) => {
-  const { secret } = req.body;
+const runSeed = async (secret, res) => {
 
   if (!process.env.SEED_SECRET || secret !== process.env.SEED_SECRET) {
     return res.status(403).json({ success: false, message: 'Forbidden' });
@@ -129,6 +127,12 @@ router.post('/', async (req, res) => {
     console.error('Seed error:', error);
     res.status(500).json({ success: false, message: error.message });
   }
-});
+};
+
+// GET /api/seed?secret=xxx  — open in browser
+router.get('/', (req, res) => runSeed(req.query.secret, res));
+
+// POST /api/seed  { "secret": "xxx" }
+router.post('/', (req, res) => runSeed(req.body.secret, res));
 
 module.exports = router;

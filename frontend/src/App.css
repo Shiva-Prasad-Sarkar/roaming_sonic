@@ -5,6 +5,7 @@
   --text-primary: #212529;
   --text-secondary: #6c757d;
   --text-tertiary: #495057;
+  --text-color: #212529;
   --border-color: #dee2e6;
   --shadow: rgba(0, 0, 0, 0.1);
   --shadow-hover: rgba(0, 0, 0, 0.15);
@@ -13,6 +14,8 @@
   --input-border: #ced4da;
   --gradient-start: #667eea;
   --gradient-end: #764ba2;
+  --primary-color: #667eea;
+  --primary-hover: #5a6fd6;
   --success: #28a745;
   --danger: #dc3545;
   --warning: #ffc107;
@@ -20,6 +23,13 @@
   --sidebar-bg-start: #1a1a2e;
   --sidebar-bg-end: #16213e;
   --sidebar-text: #ffffff;
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+  --radius-xl: 24px;
+  --transition-fast: 0.2s ease;
+  --transition-base: 0.3s ease;
+  --transition-smooth: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 :root[data-theme="light"] {
@@ -29,6 +39,7 @@
   --text-primary: #212529;
   --text-secondary: #6c757d;
   --text-tertiary: #495057;
+  --text-color: #212529;
   --border-color: #dee2e6;
   --shadow: rgba(0, 0, 0, 0.1);
   --shadow-hover: rgba(0, 0, 0, 0.15);
@@ -37,6 +48,8 @@
   --input-border: #ced4da;
   --gradient-start: #667eea;
   --gradient-end: #764ba2;
+  --primary-color: #667eea;
+  --primary-hover: #5a6fd6;
   --success: #28a745;
   --danger: #dc3545;
   --warning: #ffc107;
@@ -53,6 +66,7 @@
   --text-primary: #eaeaea;
   --text-secondary: #b4b4b4;
   --text-tertiary: #d0d0d0;
+  --text-color: #eaeaea;
   --border-color: #2c3e50;
   --shadow: rgba(0, 0, 0, 0.3);
   --shadow-hover: rgba(0, 0, 0, 0.4);
@@ -61,6 +75,8 @@
   --input-border: #2c3e50;
   --gradient-start: #667eea;
   --gradient-end: #764ba2;
+  --primary-color: #8b9cff;
+  --primary-hover: #7c8ff0;
   --success: #28a745;
   --danger: #dc3545;
   --warning: #ffc107;
@@ -141,4 +157,513 @@ code {
   height: 40px;
   font-size: 20px;
   margin-left: 10px;
+}
+
+/* Global responsive layer: keep desktop unchanged, improve phone layouts */
+@media (max-width: 992px) {
+  .tours-container {
+    flex-direction: column;
+  }
+
+  .tours-sidebar,
+  .filters-sidebar {
+    width: 100%;
+    position: static;
+    top: auto;
+    margin-bottom: 20px;
+    z-index: 10;
+  }
+
+  .hotels-content,
+  .guides-content,
+  .contact-container,
+  .about-grid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  .stats-container,
+  .services-grid,
+  .features-grid,
+  .packages-grid,
+  .destinations-grid,
+  .emergency-grid,
+  .contact-info,
+  .footer-content {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* Tablet mid-range: 769px – 900px */
+@media (min-width: 769px) and (max-width: 900px) {
+  .hotels-grid,
+  .guides-grid,
+  .tours-grid {
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 280px), 1fr));
+  }
+}
+
+@media (max-width: 768px) {
+  body,
+  .App,
+  .home-container,
+  .tours-page,
+  .buses-page,
+  .hotels-page,
+  .guides-page,
+  .group-tours-page,
+  .dashboard-container,
+  .auth-container,
+  .payment-form-container {
+    overflow-x: hidden;
+    width: 100vw;
+    box-sizing: border-box;
+  }
+
+  .theme-toggle-btn {
+    top: 12px;
+    right: 12px;
+    width: 44px;
+    height: 44px;
+    font-size: 20px;
+  }
+
+  .hero-section {
+    padding: 140px 16px 52px;
+    min-height: 100svh;
+    animation: none;
+  }
+
+  .hero-particles,
+  .plane-animation {
+    display: none;
+  }
+
+  .hero-content {
+    max-width: 100%;
+  }
+
+  .hero-title {
+    font-size: 2rem;
+    line-height: 1.25;
+  }
+
+  .brand-main-title {
+    font-size: 2.2rem;
+    letter-spacing: 2px;
+    gap: 10px;
+  }
+
+  .hero-subtitle {
+    font-size: 1.15rem;
+  }
+
+  .hero-description {
+    font-size: 0.95rem;
+    margin-bottom: 24px;
+  }
+
+  .hero-actions,
+  .hero-features {
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+
+  .hero-feature-item {
+    font-size: 14px;
+  }
+
+  .btn-primary,
+  .btn-secondary,
+  .btn-outline,
+  .btn-package,
+  .view-btn,
+  .book-btn,
+  .contact-btn,
+  .search-btn,
+  .reset-btn,
+  .reset-btn-small,
+  .review-btn,
+  .review-btn-small,
+  .btn-cancel,
+  .btn-pay,
+  .btn-submit,
+  .btn-complaint,
+  .btn-subscribe,
+  .btn-subscribe-main,
+  .apply-coupon-btn,
+  .remove-coupon-btn,
+  .nav-btn,
+  .back-button,
+  .home-btn,
+  .home-btn-auth {
+    min-height: 44px;
+    max-width: 100%;
+    width: auto;
+    padding: 10px 16px;
+    border-radius: 12px;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0.01em;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    line-height: 1.2;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .btn-primary:active,
+  .btn-secondary:active,
+  .btn-outline:active,
+  .btn-package:active,
+  .view-btn:active,
+  .book-btn:active,
+  .contact-btn:active,
+  .search-btn:active,
+  .nav-btn:active,
+  .back-button:active,
+  .apply-coupon-btn:active,
+  .remove-coupon-btn:active {
+    transform: translateY(1px) scale(0.99);
+  }
+
+  .hero-actions .btn-primary,
+  .hero-actions .btn-secondary,
+  .modal-actions .btn-primary,
+  .modal-actions .btn-outline,
+  .request-form .btn-primary,
+  .form-actions button,
+  .filters-sidebar .search-btn,
+  .filters-sidebar .reset-btn,
+  .filters-sidebar .reset-btn-small,
+  .filter-section .reset-btn,
+  .filter-section .reset-btn-small,
+  .filter-section .search-btn,
+  .tour-footer .book-btn,
+  .hotel-footer .view-btn,
+  .guide-footer .contact-btn,
+  .request-actions button,
+  .booking-actions button,
+  .action-buttons button,
+  .dashboard-tabs button,
+  .section-tabs button {
+    width: 100%;
+  }
+
+  .form-actions,
+  .request-actions,
+  .booking-actions,
+  .action-buttons {
+    gap: 10px;
+  }
+
+  .quick-nav-btn {
+    min-height: 42px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 700;
+  }
+
+  .section-title {
+    font-size: 28px;
+    line-height: 1.3;
+  }
+
+  .section-subtitle {
+    font-size: 15px;
+    margin-bottom: 32px;
+    line-height: 1.6;
+    padding: 0 4px;
+  }
+
+  .stats-banner,
+  .how-it-works,
+  .services-section,
+  .packages-section,
+  .features-section,
+  .destinations-section,
+  .video-section,
+  .about-section,
+  .faq-section,
+  .contact-section,
+  .emergency-section,
+  .cta-section {
+    padding: 52px 16px;
+  }
+
+  .stats-container,
+  .services-grid,
+  .features-grid,
+  .packages-grid,
+  .destinations-grid,
+  .footer-content,
+  .emergency-grid,
+  .contact-info,
+  .modal-highlights ul {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .step-connector {
+    display: none;
+  }
+
+  .tours-header,
+  .hotels-header,
+  .guides-header,
+  .legal-header {
+    padding: 80px 16px 32px;
+  }
+
+  .tours-header h1,
+  .hotels-header h1,
+  .guides-header h1,
+  .legal-header h1 {
+    font-size: 1.9rem;
+    line-height: 1.2;
+  }
+
+  .tours-header p,
+  .hotels-header p,
+  .guides-header p,
+  .legal-header p {
+    font-size: 0.98rem;
+    opacity: 0.9;
+  }
+
+  .tours-header .header-nav,
+  .hotels-header .header-nav,
+  .guides-header .header-nav {
+    position: static;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 14px;
+  }
+
+  .container,
+  .tours-container,
+  .legal-container {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  .hotels-content,
+  .guides-content,
+  .tours-grid,
+  .hotels-grid,
+  .guides-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .filters-sidebar,
+  .filter-section {
+    position: static;
+    top: auto;
+    padding: 18px;
+    border-radius: 14px;
+  }
+
+  .price-inputs,
+  .price-range {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .price-inputs input,
+  .price-range input {
+    width: 100%;
+  }
+
+  .tour-image,
+  .hotel-image,
+  .destination-image,
+  .modal-image {
+    height: 210px;
+  }
+
+  .tour-details,
+  .hotel-info,
+  .guide-card,
+  .modal-body,
+  .legal-content {
+    padding: 16px;
+  }
+
+  .tour-info {
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: flex-start;
+  }
+
+  .tour-footer,
+  .hotel-footer,
+  .guide-footer {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+  }
+
+  .modal-content,
+  .destination-modal-content,
+  .complaint-modal {
+    width: calc(100% - 24px);
+    max-height: 90vh;
+    padding: 20px 16px;
+    border-radius: 16px;
+    margin: 12px;
+  }
+
+  .request-form .form-row {
+    grid-template-columns: 1fr;
+  }
+
+  .footer {
+    padding: 44px 16px 16px;
+  }
+
+  .newsletter-form {
+    flex-direction: column;
+  }
+}
+
+/* Fine-tune for 425px and below */
+@media (max-width: 425px) {
+  .hero-title {
+    font-size: 1.85rem;
+  }
+
+  .brand-main-title {
+    font-size: 1.95rem;
+    letter-spacing: 1.5px;
+    gap: 8px;
+  }
+
+  .hero-subtitle {
+    font-size: 1.05rem;
+  }
+
+  .section-title {
+    font-size: 1.55rem;
+  }
+
+  .hero-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .hero-actions .btn-primary,
+  .hero-actions .btn-secondary {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .stats-banner,
+  .how-it-works,
+  .services-section,
+  .packages-section,
+  .features-section,
+  .destinations-section,
+  .video-section,
+  .about-section,
+  .faq-section,
+  .contact-section,
+  .emergency-section,
+  .cta-section {
+    padding: 44px 12px;
+  }
+
+  .tour-image,
+  .hotel-image,
+  .destination-image {
+    height: 195px;
+  }
+
+  .modal-content,
+  .destination-modal-content,
+  .complaint-modal {
+    width: calc(100% - 16px);
+    padding: 18px 14px;
+    margin: 8px;
+  }
+}
+
+@media (max-width: 480px) {
+  .brand-main-title {
+    font-size: 1.75rem;
+    letter-spacing: 1px;
+    gap: 8px;
+  }
+
+  .hero-title {
+    font-size: 1.75rem;
+  }
+
+  .hero-subtitle {
+    font-size: 1rem;
+  }
+
+  .section-title,
+  .video-content h2,
+  .cta-content h2,
+  .emergency-header h2 {
+    font-size: 1.5rem;
+  }
+
+  .tour-image,
+  .hotel-image,
+  .destination-image,
+  .modal-image {
+    height: 190px;
+  }
+
+  .price-amount,
+  .price-value,
+  .rate-value,
+  .stat-number {
+    font-size: 1.75rem;
+  }
+}
+
+@media (max-width: 375px) {
+  .brand-main-title {
+    font-size: 1.55rem;
+    letter-spacing: 0.5px;
+  }
+
+  .hero-title {
+    font-size: 1.55rem;
+  }
+
+  .hero-subtitle {
+    font-size: 0.95rem;
+  }
+
+  .section-title,
+  .video-content h2,
+  .cta-content h2 {
+    font-size: 1.35rem;
+  }
+
+  .tour-image,
+  .hotel-image,
+  .destination-image {
+    height: 175px;
+  }
+
+  .stat-number,
+  .price-amount,
+  .price-value,
+  .rate-value {
+    font-size: 1.6rem;
+  }
+
+  .container,
+  .tours-container,
+  .legal-container {
+    padding-left: 12px;
+    padding-right: 12px;
+  }
 }

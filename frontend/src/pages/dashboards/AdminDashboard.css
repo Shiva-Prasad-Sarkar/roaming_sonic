@@ -9,19 +9,19 @@
 }
 
 .dashboard-header h1 {
-  color: #2c3e50;
+  color: var(--text-primary);
   margin-bottom: 0.5rem;
 }
 
 .dashboard-header p {
-  color: #7f8c8d;
+  color: var(--text-secondary);
 }
 
 .dashboard-tabs {
   display: flex;
   gap: 1rem;
   margin-bottom: 2rem;
-  border-bottom: 2px solid #ecf0f1;
+  border-bottom: 2px solid var(--border-color);
   flex-wrap: wrap;
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
@@ -32,7 +32,7 @@
   background: none;
   border: none;
   border-bottom: 3px solid transparent;
-  color: #7f8c8d;
+  color: var(--text-secondary);
   font-size: 1rem;
   font-weight: 500;
   cursor: pointer;
@@ -42,8 +42,8 @@
 }
 
 .dashboard-tabs button:hover {
-  color: #2c3e50;
-  background-color: #f8f9fa;
+  color: var(--text-primary);
+  background-color: var(--bg-secondary);
 }
 
 .dashboard-tabs button.active {
@@ -55,7 +55,7 @@
   text-align: center;
   padding: 3rem;
   font-size: 1.2rem;
-  color: #7f8c8d;
+  color: var(--text-secondary);
 }
 
 .stats-grid {
@@ -108,9 +108,10 @@
 
 .table-container {
   overflow-x: auto;
-  background: white;
+  background: var(--card-bg);
   border-radius: 10px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 4px var(--shadow);
+  border: 1px solid var(--border-color);
 }
 
 .data-table {
@@ -119,24 +120,25 @@
 }
 
 .data-table thead {
-  background-color: #f8f9fa;
+  background-color: var(--bg-secondary);
 }
 
 .data-table th {
   padding: 1rem;
   text-align: left;
   font-weight: 600;
-  color: #2c3e50;
-  border-bottom: 2px solid #dee2e6;
+  color: var(--text-primary);
+  border-bottom: 2px solid var(--border-color);
 }
 
 .data-table td {
   padding: 1rem;
-  border-bottom: 1px solid #dee2e6;
+  border-bottom: 1px solid var(--border-color);
+  color: var(--text-primary);
 }
 
 .data-table tbody tr:hover {
-  background-color: #f8f9fa;
+  background-color: var(--bg-secondary);
 }
 
 .status-badge {
@@ -225,16 +227,17 @@
 
 /* Tour Form Styles */
 .tour-form-container {
-  background: white;
+  background: var(--card-bg);
   padding: 2rem;
   border-radius: 10px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 4px var(--shadow);
+  border: 1px solid var(--border-color);
   margin-bottom: 2rem;
 }
 
 .tour-form-container h3 {
   margin-bottom: 1.5rem;
-  color: #2c3e50;
+  color: var(--text-primary);
 }
 
 .tour-form {
@@ -257,24 +260,26 @@
 .form-group label {
   margin-bottom: 0.5rem;
   font-weight: 500;
-  color: #2c3e50;
+  color: var(--text-primary);
 }
 
 .form-group input,
 .form-group select,
 .form-group textarea {
   padding: 0.75rem;
-  border: 1px solid #ced4da;
+  border: 1px solid var(--border-color);
   border-radius: 5px;
   font-size: 1rem;
   transition: border-color 0.3s;
+  background: var(--card-bg);
+  color: var(--text-primary);
 }
 
 .form-group input:focus,
 .form-group select:focus,
 .form-group textarea:focus {
   outline: none;
-  border-color: #3498db;
+  border-color: #667eea;
 }
 
 /* Language and Specialization Selection Grids */
@@ -291,10 +296,10 @@
 .spec-toggle-btn,
 .place-toggle-btn {
   padding: 12px 16px;
-  border: 2px solid #e5e7eb;
+  border: 2px solid var(--border-color);
   border-radius: 10px;
-  background: white;
-  color: #374151;
+  background: var(--card-bg);
+  color: var(--text-primary);
   font-size: 14px;
   font-weight: 500;
   cursor: pointer;
@@ -370,7 +375,7 @@
 .form-group label {
   margin-bottom: 0.5rem;
   font-weight: 600;
-  color: #2c3e50;
+  color: var(--text-primary);
   font-size: 15px;
   display: flex;
   align-items: center;
@@ -439,29 +444,32 @@
 }
 
 .tours-list {
-  background: white;
+  background: var(--card-bg);
   padding: 2rem;
   border-radius: 10px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 4px var(--shadow);
+  border: 1px solid var(--border-color);
 }
 
 .tours-list h3 {
   margin-bottom: 1.5rem;
-  color: #2c3e50;
+  color: var(--text-primary);
 }
 
 /* User Management */
 .role-select {
   padding: 0.5rem;
-  border: 1px solid #ced4da;
+  border: 1px solid var(--border-color);
   border-radius: 5px;
   font-size: 0.9rem;
   cursor: pointer;
+  background: var(--card-bg);
+  color: var(--text-primary);
 }
 
 .role-select:focus {
   outline: none;
-  border-color: #3498db;
+  border-color: #667eea;
 }
 
 /* Responsive Design */
@@ -481,7 +489,7 @@
   }
 
   .dashboard-tabs::-webkit-scrollbar-thumb {
-    background: #cbd5e0;
+    background: var(--border-color);
     border-radius: 4px;
   }
 
@@ -491,16 +499,17 @@
   }
 
   .stats-grid {
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    grid-template-columns: repeat(2, 1fr);
     gap: 1rem;
   }
 
   .stat-card {
-    padding: 1rem;
+    padding: 1.1rem 1rem;
+    margin-bottom: 0;
   }
 
   .stat-number {
-    font-size: 1.5rem;
+    font-size: 1.6rem;
   }
 
   .data-table {
@@ -518,6 +527,7 @@
 
   .action-buttons button {
     width: 100%;
+    font-size: 0.85rem;
   }
 
   .form-row {
@@ -526,7 +536,23 @@
 
   .tour-form-container,
   .tours-list {
-    padding: 1rem;
+    padding: 1.25rem;
+  }
+
+  .request-card {
+    padding: 20px 16px;
+  }
+
+  .request-actions {
+    flex-direction: column;
+  }
+
+  .request-actions button {
+    width: 100%;
+  }
+
+  .wishlist-grid {
+    grid-template-columns: 1fr;
   }
 }
 
@@ -535,22 +561,36 @@
     grid-template-columns: 1fr;
   }
 
+  .stat-card {
+    padding: 1rem;
+  }
+
+  .stat-number {
+    font-size: 1.4rem;
+  }
+
   .dashboard-tabs {
     gap: 0.25rem;
   }
 
   .dashboard-tabs button {
-    padding: 0.6rem 0.8rem;
-    font-size: 0.85rem;
-    min-width: 100px;
+    padding: 0.6rem 0.75rem;
+    font-size: 0.82rem;
+    min-width: 90px;
   }
 
   .dashboard-header h1 {
-    font-size: 1.5rem;
+    font-size: 1.4rem;
   }
 
   .dashboard-header p {
-    font-size: 0.9rem;
+    font-size: 0.88rem;
+  }
+
+  .language-grid,
+  .specialization-grid,
+  .places-grid {
+    grid-template-columns: repeat(2, 1fr);
   }
 }
 
@@ -562,8 +602,8 @@
 }
 
 .request-card {
-  background: white;
-  border: 2px solid #e0e0e0;
+  background: var(--card-bg);
+  border: 2px solid var(--border-color);
   border-radius: 16px;
   padding: 28px 24px;
   margin-bottom: 2.2rem;
@@ -584,11 +624,11 @@
 
 .request-header h3 {
   margin: 0 0 5px 0;
-  color: #2c3e50;
+  color: var(--text-primary);
 }
 
 .request-details {
-  background: #f8f9fa;
+  background: var(--bg-secondary);
   padding: 20px 18px;
   border-radius: 10px;
   margin-bottom: 22px;
@@ -596,7 +636,7 @@
 
 .request-details p {
   margin: 12px 0 12px 0;
-  color: #555;
+  color: var(--text-secondary);
 }
 
 .request-actions {
@@ -656,8 +696,8 @@
 }
 
 .review-item {
-  background: white;
-  border: 2px solid #e0e0e0;
+  background: var(--card-bg);
+  border: 2px solid var(--border-color);
   border-radius: 16px;
   padding: 28px 24px;
   margin-bottom: 2.2rem;
@@ -676,12 +716,12 @@
 }
 
 .review-date {
-  color: #95a5a6;
+  color: var(--text-secondary);
   font-size: 14px;
 }
 
 .review-comment {
-  color: #555;
+  color: var(--text-secondary);
   line-height: 1.7;
   margin: 0 0 10px 0;
 }
@@ -694,8 +734,8 @@
 }
 
 .request-card {
-  background: #f9fafb;
-  border: 1px solid #e5e7eb;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
   border-radius: 8px;
   padding: 20px;
   transition: all 0.3s ease;
@@ -712,17 +752,17 @@
   align-items: flex-start;
   margin-bottom: 15px;
   padding-bottom: 15px;
-  border-bottom: 1px solid #e5e7eb;
+  border-bottom: 1px solid var(--border-color);
 }
 
 .request-header h3 {
   margin: 0 0 5px 0;
-  color: #2c3e50;
+  color: var(--text-primary);
   font-size: 20px;
 }
 
 .guide-rating {
-  color: #666;
+  color: var(--text-secondary);
   font-size: 14px;
   margin-top: 5px;
 }
@@ -764,12 +804,12 @@
 
 .request-details p {
   margin: 5px 0;
-  color: #374151;
+  color: var(--text-primary);
   font-size: 14px;
 }
 
 .request-details strong {
-  color: #1f2937;
+  color: var(--text-primary);
 }
 
 .response-message {
@@ -808,7 +848,7 @@
 }
 
 .modal-content {
-  background: white;
+  background: var(--card-bg);
   padding: 30px;
   border-radius: 12px;
   max-width: 500px;
@@ -817,6 +857,7 @@
   overflow-y: auto;
   position: relative;
   animation: slideUp 0.3s ease;
+  border: 1px solid var(--border-color);
 }
 
 .modal-close {
@@ -826,7 +867,7 @@
   background: none;
   border: none;
   font-size: 28px;
-  color: #999;
+  color: var(--text-secondary);
   cursor: pointer;
   width: 32px;
   height: 32px;
@@ -843,24 +884,25 @@
 
 .modal-content h2 {
   margin: 0 0 20px 0;
-  color: #2c3e50;
+  color: var(--text-primary);
 }
 
 .modal-guide-info {
-  background: #f8f9fa;
+  background: var(--bg-secondary);
   padding: 15px;
   border-radius: 8px;
   margin-bottom: 20px;
+  border: 1px solid var(--border-color);
 }
 
 .modal-guide-info h3 {
   margin: 0 0 5px 0;
-  color: #2c3e50;
+  color: var(--text-primary);
 }
 
 .modal-guide-info p {
   margin: 0;
-  color: #666;
+  color: var(--text-secondary);
 }
 
 .review-form {
@@ -877,7 +919,7 @@
 
 .review-form label {
   font-weight: 600;
-  color: #374151;
+  color: var(--text-primary);
 }
 
 .rating-selector {
@@ -904,18 +946,21 @@
 
 .review-form textarea {
   padding: 12px;
-  border: 1px solid #d1d5db;
+  border: 1px solid var(--border-color);
   border-radius: 8px;
   font-family: inherit;
   font-size: 14px;
   resize: vertical;
   min-height: 100px;
+  background: var(--card-bg);
+  color: var(--text-primary);
+  width: 100%;
 }
 
 .review-form textarea:focus {
   outline: none;
-  border-color: #ff6b35;
-  box-shadow: 0 0 0 3px rgba(255, 107, 53, 0.1);
+  border-color: #667eea;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
 }
 
 .review-form .btn-primary {
@@ -945,9 +990,10 @@
 }
 
 .wishlist-item {
-  background: white;
+  background: var(--card-bg);
   border-radius: 12px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 8px var(--shadow);
+  border: 1px solid var(--border-color);
   transition: all 0.3s ease;
   overflow: hidden;
   display: flex;

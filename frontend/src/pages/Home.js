@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { BASE_URL } from '../services/api';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { useTheme } from '../context/ThemeContext';
@@ -16,6 +17,7 @@ const Home = () => {
   const [footerEmail, setFooterEmail] = useState('');
   const [footerMessage, setFooterMessage] = useState('');
   const [showComplaintModal, setShowComplaintModal] = useState(false);
+  const [isMobileQuickNavOpen, setIsMobileQuickNavOpen] = useState(false);
   const [complaintData, setComplaintData] = useState({
     subject: '',
     description: '',
@@ -91,7 +93,7 @@ const Home = () => {
     try {
       const token = localStorage.getItem('token');
       await axios.post(
-        'http://localhost:5000/api/complaints',
+        `${BASE_URL}/api/complaints`,
         complaintData,
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -233,6 +235,42 @@ const Home = () => {
         </div>
         
         {/* Quick Navigation Buttons */}
+        <div className="quick-nav-mobile">
+          <button
+            type="button"
+            className="quick-nav-hamburger"
+            aria-label="Toggle quick navigation menu"
+            aria-expanded={isMobileQuickNavOpen}
+            onClick={() => setIsMobileQuickNavOpen((prev) => !prev)}
+          >
+            <span className="hamburger-icon">☰</span>
+            <span className="hamburger-label">Menu</span>
+          </button>
+
+          <div className={`quick-nav-mobile-menu ${isMobileQuickNavOpen ? 'open' : ''}`}>
+            <Link to="/hotels" className="quick-nav-btn" onClick={() => setIsMobileQuickNavOpen(false)}>
+              <span className="quick-nav-icon">🏨</span>
+              <span className="quick-nav-text">Hotels</span>
+            </Link>
+            <Link to="/guides" className="quick-nav-btn" onClick={() => setIsMobileQuickNavOpen(false)}>
+              <span className="quick-nav-icon">🧭</span>
+              <span className="quick-nav-text">Guides</span>
+            </Link>
+            <Link to="/buses" className="quick-nav-btn" onClick={() => setIsMobileQuickNavOpen(false)}>
+              <span className="quick-nav-icon">🚌</span>
+              <span className="quick-nav-text">Buses</span>
+            </Link>
+            <Link to="/tours" className="quick-nav-btn" onClick={() => setIsMobileQuickNavOpen(false)}>
+              <span className="quick-nav-icon">🎒</span>
+              <span className="quick-nav-text">Tours</span>
+            </Link>
+            <Link to="/group-tours" className="quick-nav-btn" onClick={() => setIsMobileQuickNavOpen(false)}>
+              <span className="quick-nav-icon">👥</span>
+              <span className="quick-nav-text">Group Tours</span>
+            </Link>
+          </div>
+        </div>
+
         <div className="quick-nav-buttons">
           <Link to="/hotels" className="quick-nav-btn">
             <span className="quick-nav-icon">🏨</span>

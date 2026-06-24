@@ -245,9 +245,9 @@
 
 .guides-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-  gap: 30px;
-  padding: 5px;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 320px), 1fr));
+  gap: 24px;
+  padding: 2px;
 }
 
 .guides-list {
@@ -689,35 +689,115 @@
   .guides-content {
     grid-template-columns: 1fr;
   }
-  
+
   .filters-sidebar {
-    margin-bottom: 30px;
+    margin-bottom: 24px;
+    position: static;
   }
 
   .guides-grid {
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 280px), 1fr));
+    gap: 20px;
   }
-  
+
   .price-range {
     flex-wrap: wrap;
   }
-  
+
   .price-range input {
-    min-width: 120px;
+    min-width: 100px;
   }
 }
 
 @media (max-width: 768px) {
+  .guides-header {
+    padding: 80px 16px 40px;
+  }
+
   .guides-header h1 {
-    font-size: 32px;
+    font-size: 1.85rem;
   }
 
   .guides-header p {
-    font-size: 16px;
+    font-size: 15px;
   }
 
   .guides-grid {
     grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .guide-card {
+    padding: 20px 18px;
+  }
+
+  .guide-header {
+    gap: 14px;
+  }
+
+  .avatar-circle,
+  .avatar-image {
+    width: 68px;
+    height: 68px;
+    font-size: 28px;
+  }
+
+  .guide-basic-info h3 {
+    font-size: 20px;
+  }
+
+  .guide-footer {
+    flex-direction: column;
+    gap: 14px;
+    align-items: stretch;
+    padding-top: 18px;
+    margin-top: 18px;
+  }
+
+  .contact-btn {
+    text-align: center;
+    display: block;
+    width: 100%;
+  }
+
+  .rate-value {
+    font-size: 26px;
+  }
+
+  .guide-details {
+    padding: 16px;
+  }
+
+  .modal-content {
+    padding: 28px 20px;
+  }
+
+  .request-form .form-row {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .guides-header {
+    padding: 76px 14px 32px;
+  }
+
+  .guides-header h1 {
+    font-size: 1.65rem;
+  }
+
+  .guide-card {
+    padding: 18px 14px;
+  }
+
+  .specialization-buttons {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 6px;
+  }
+
+  .spec-btn {
+    font-size: 12px;
+    padding: 8px 10px;
   }
 }
 

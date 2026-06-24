@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { BASE_URL } from '../services/api';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { useTheme } from '../context/ThemeContext';
@@ -67,7 +68,7 @@ const DashboardLayout = ({ children }) => {
     <div className="dashboard-container">
       {/* External Toggle Button (always visible) */}
       {!sidebarOpen && (
-        <button 
+        <button
           className="sidebar-toggle-external"
           onClick={() => setSidebarOpen(true)}
           title="Open Sidebar"
@@ -75,7 +76,16 @@ const DashboardLayout = ({ children }) => {
           ☰
         </button>
       )}
-      
+
+      {/* Mobile backdrop overlay */}
+      {sidebarOpen && (
+        <div
+          className="sidebar-backdrop"
+          onClick={() => setSidebarOpen(false)}
+          aria-hidden="true"
+        />
+      )}
+
       {/* Sidebar */}
       <aside className={`dashboard-sidebar ${sidebarOpen ? 'open' : 'closed'}`}>
         <div className="sidebar-header">
@@ -98,7 +108,7 @@ const DashboardLayout = ({ children }) => {
         <div className="user-info">
           <div className="user-avatar">
             {user?.photo && user.photo !== 'default-avatar.png' ? (
-              <img src={`http://localhost:5000${user.photo}`} alt={user?.name} style={{width: '100%', height: '100%', objectFit: 'cover'}} />
+              <img src={`${BASE_URL}${user.photo}`} alt={user?.name} style={{width: '100%', height: '100%', objectFit: 'cover'}} />
             ) : (
               <div className="avatar-placeholder">
                 {user?.name?.charAt(0).toUpperCase()}

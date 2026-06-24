@@ -215,9 +215,9 @@
 
 .tours-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-  gap: 30px;
-  padding: 5px;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 320px), 1fr));
+  gap: 24px;
+  padding: 2px;
 }
 
 .tour-card {
@@ -656,6 +656,8 @@
 @media (max-width: 1024px) {
   .tours-container {
     flex-direction: column;
+    padding: 1.25rem 1.25rem;
+    gap: 1.25rem;
   }
 
   .tours-sidebar {
@@ -664,33 +666,89 @@
 
   .filter-section {
     position: static;
+    padding: 20px;
   }
 
   .tours-grid {
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 280px), 1fr));
+    gap: 20px;
   }
 }
 
 @media (max-width: 768px) {
   .tours-page {
-    padding-top: 60px;
+    padding-top: 0;
   }
 
   .tours-header {
-    padding: 2rem 1rem;
+    padding: 80px 16px 40px;
   }
 
   .tours-header h1 {
-    font-size: 2rem;
+    font-size: 1.85rem;
+  }
+
+  .tours-header p {
+    font-size: 15px;
   }
 
   .tours-container {
     padding: 1rem;
+    gap: 1rem;
   }
 
   .tours-grid {
     grid-template-columns: 1fr;
-    gap: 1.5rem;
+    gap: 16px;
+  }
+
+  .tour-image {
+    height: 210px;
+  }
+
+  .tour-details {
+    padding: 1.1rem;
+  }
+
+  .tour-footer {
+    flex-direction: column;
+    gap: 12px;
+    align-items: stretch;
+  }
+
+  .book-btn {
+    width: 100%;
+    text-align: center;
+    justify-content: center;
+  }
+
+  .price-amount {
+    font-size: 24px;
+  }
+
+  .filter-section {
+    border-radius: 14px;
+    padding: 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .tours-header {
+    padding: 76px 14px 32px;
+  }
+
+  .tours-header h1 {
+    font-size: 1.65rem;
+  }
+
+  .tour-image {
+    height: 185px;
+  }
+
+  .tour-info {
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    gap: 12px;
   }
 }
 

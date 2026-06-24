@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { BASE_URL } from '../services/api';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import './Hotels.css';
@@ -62,7 +63,7 @@ const Hotels = () => {
   const fetchWishlist = async () => {
     try {
       const token = localStorage.getItem('token');
-      const response = await axios.get('http://localhost:5000/api/users/wishlist', {
+      const response = await axios.get(`${BASE_URL}/api/users/wishlist`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       setWishlist(response.data.data.map(item => item._id));
@@ -83,7 +84,7 @@ const Hotels = () => {
       if (filters.maxPrice) queryParams.append('maxPrice', filters.maxPrice);
       if (filters.minRating) queryParams.append('minRating', filters.minRating);
 
-      const response = await axios.get(`http://localhost:5000/api/hotels?${queryParams.toString()}`);
+      const response = await axios.get(`${BASE_URL}/api/hotels?${queryParams.toString()}`);
       setHotels(response.data.data);
       setLoading(false);
     } catch (error) {
@@ -149,7 +150,7 @@ const Hotels = () => {
     try {
       const token = localStorage.getItem('token');
       const response = await axios.post(
-        'http://localhost:5000/api/bookings',
+        `${BASE_URL}/api/bookings`,
         {
           bookingType: 'hotel',
           hotel: selectedHotel._id,
@@ -168,7 +169,7 @@ const Hotels = () => {
       if (wishlist.includes(selectedHotel._id)) {
         try {
           await axios.delete(
-            `http://localhost:5000/api/users/wishlist/${selectedHotel._id}`,
+            `${BASE_URL}/api/users/wishlist/${selectedHotel._id}`,
             { headers: { Authorization: `Bearer ${token}` } }
           );
           setWishlist(wishlist.filter(id => id !== selectedHotel._id));
@@ -207,14 +208,14 @@ const Hotels = () => {
       
       if (isInWishlist) {
         await axios.delete(
-          `http://localhost:5000/api/users/wishlist/${hotelId}`,
+          `${BASE_URL}/api/users/wishlist/${hotelId}`,
           { headers: { Authorization: `Bearer ${token}` } }
         );
         setWishlist(wishlist.filter(id => id !== hotelId));
         alert('Removed from wishlist');
       } else {
         await axios.post(
-          `http://localhost:5000/api/users/wishlist/${hotelId}`,
+          `${BASE_URL}/api/users/wishlist/${hotelId}`,
           {},
           { headers: { Authorization: `Bearer ${token}` } }
         );
@@ -252,7 +253,7 @@ const Hotels = () => {
     try {
       const token = localStorage.getItem('token');
       await axios.post(
-        `http://localhost:5000/api/hotels/${reviewHotel._id}/reviews`,
+        `${BASE_URL}/api/hotels/${reviewHotel._id}/reviews`,
         reviewData,
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -367,7 +368,7 @@ const Hotels = () => {
                     <img 
                       src={
                         hotel.photos && hotel.photos.length > 0 
-                          ? `http://localhost:5000${hotel.photos[0].url}` 
+                          ? `${BASE_URL}${hotel.photos[0].url}` 
                           : 'https://via.placeholder.com/400x250?text=No+Image'
                       } 
                       alt={hotel.name}
@@ -598,7 +599,7 @@ const Hotels = () => {
                   transition: 'transform 0.3s ease'
                 }}>
                   <img 
-                    src={`http://localhost:5000${photo.url}`}
+                    src={`${BASE_URL}${photo.url}`}
                     alt={photo.caption || `Photo ${index + 1}`}
                     style={{
                       width: '100%',

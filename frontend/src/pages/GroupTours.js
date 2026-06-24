@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { BASE_URL } from '../services/api';
 import { useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';
 import { useAuth } from '../context/AuthContext';
@@ -22,7 +23,7 @@ const GroupTours = () => {
 
   const fetchGroupTours = async () => {
     try {
-      const response = await axios.get('http://localhost:5000/api/group-tours');
+      const response = await axios.get(`${BASE_URL}/api/group-tours`);
       console.log('Group tours response:', response.data);
       setGroupTours(response.data.data || []);
     } catch (error) {
@@ -54,7 +55,7 @@ const GroupTours = () => {
     try {
       const token = localStorage.getItem('token');
       await axios.post(
-        `http://localhost:5000/api/group-tours/${selectedTour._id}/join`,
+        `${BASE_URL}/api/group-tours/${selectedTour._id}/join`,
         { ...paymentData },
         { headers: { Authorization: `Bearer ${token}` } }
       );

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { BASE_URL } from '../../services/api';
 import DashboardLayout from '../../components/DashboardLayout';
 import { useAuth } from '../../context/AuthContext';
 import ManageHotels from './ManageHotels';
@@ -35,7 +36,7 @@ const HotelOwnerDashboard = () => {
   const fetchProfile = async () => {
     try {
       const token = localStorage.getItem('token');
-      const response = await axios.get('http://localhost:5000/api/users/profile', {
+      const response = await axios.get(`${BASE_URL}/api/users/profile`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       setProfile(response.data.user);
@@ -47,7 +48,7 @@ const HotelOwnerDashboard = () => {
   const fetchHotels = async () => {
     try {
       const token = localStorage.getItem('token');
-      const response = await axios.get('http://localhost:5000/api/hotels/my/hotels', {
+      const response = await axios.get(`${BASE_URL}/api/hotels/my/hotels`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       setHotels(response.data.data);
@@ -77,7 +78,7 @@ const HotelOwnerDashboard = () => {
       setUploadingPhoto(true);
       const token = localStorage.getItem('token');
       const response = await axios.post(
-        'http://localhost:5000/api/users/upload-photo',
+        `${BASE_URL}/api/users/upload-photo`,
         formDataUpload,
         {
           headers: {
@@ -124,7 +125,7 @@ const HotelOwnerDashboard = () => {
         }
       };
 
-      await axios.post('http://localhost:5000/api/hotels', hotelData, {
+      await axios.post(`${BASE_URL}/api/hotels`, hotelData, {
         headers: { Authorization: `Bearer ${token}` }
       });
 
@@ -157,7 +158,7 @@ const HotelOwnerDashboard = () => {
 
     try {
       const token = localStorage.getItem('token');
-      await axios.delete(`http://localhost:5000/api/hotels/${hotelId}`, {
+      await axios.delete(`${BASE_URL}/api/hotels/${hotelId}`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       alert('Hotel deleted successfully');
@@ -197,7 +198,7 @@ const HotelOwnerDashboard = () => {
           }}>
             {profile?.photo && profile.photo !== 'default-avatar.png' ? (
               <img 
-                src={`http://localhost:5000${profile.photo}`} 
+                src={`${BASE_URL}${profile.photo}`} 
                 alt={profile.name}
                 style={{width: '100%', height: '100%', objectFit: 'cover'}}
               />

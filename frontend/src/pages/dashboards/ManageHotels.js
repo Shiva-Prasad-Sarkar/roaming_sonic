@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { BASE_URL } from '../../services/api';
 import axios from 'axios';
 import { useAuth } from '../../context/AuthContext';
 import './ManageHotels.css';
@@ -80,7 +81,7 @@ const ManageHotels = () => {
   const fetchHotels = async () => {
     try {
       const token = localStorage.getItem('token');
-      const response = await axios.get('http://localhost:5000/api/hotels/my/hotels', {
+      const response = await axios.get(`${BASE_URL}/api/hotels/my/hotels`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       setHotels(response.data.data);
@@ -94,7 +95,7 @@ const ManageHotels = () => {
   const fetchBookings = async () => {
     try {
       const token = localStorage.getItem('token');
-      const response = await axios.get('http://localhost:5000/api/hotel-bookings/owner-bookings', {
+      const response = await axios.get(`${BASE_URL}/api/hotel-bookings/owner-bookings`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       setBookings(response.data.data);
@@ -108,7 +109,7 @@ const ManageHotels = () => {
     try {
       const token = localStorage.getItem('token');
       await axios.put(
-        `http://localhost:5000/api/hotel-bookings/${bookingId}/confirm`,
+        `${BASE_URL}/api/hotel-bookings/${bookingId}/confirm`,
         {},
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -124,7 +125,7 @@ const ManageHotels = () => {
     try {
       const token = localStorage.getItem('token');
       await axios.put(
-        `http://localhost:5000/api/hotel-bookings/${rejectModal.bookingId}/reject`,
+        `${BASE_URL}/api/hotel-bookings/${rejectModal.bookingId}/reject`,
         { message: rejectModal.message },
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -150,7 +151,7 @@ const ManageHotels = () => {
     try {
       const token = localStorage.getItem('token');
       await axios.patch(
-        `http://localhost:5000/api/bookings/${bookingId}/hotel-cancel`,
+        `${BASE_URL}/api/bookings/${bookingId}/hotel-cancel`,
         { cancellationReason: reason },
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -277,8 +278,8 @@ const ManageHotels = () => {
     try {
       const token = localStorage.getItem('token');
       const url = editingHotel
-        ? `http://localhost:5000/api/hotels/${editingHotel._id}`
-        : 'http://localhost:5000/api/hotels';
+        ? `${BASE_URL}/api/hotels/${editingHotel._id}`
+        : `${BASE_URL}/api/hotels`;
       const method = editingHotel ? 'put' : 'post';
 
       // Create FormData for file upload
@@ -350,7 +351,7 @@ const ManageHotels = () => {
 
     try {
       const token = localStorage.getItem('token');
-      await axios.delete(`http://localhost:5000/api/hotels/${id}`, {
+      await axios.delete(`${BASE_URL}/api/hotels/${id}`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       alert('Hotel deleted successfully');

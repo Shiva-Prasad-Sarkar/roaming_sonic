@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { BASE_URL } from '../services/api';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import './Guides.css';
@@ -74,7 +75,7 @@ const Guides = () => {
 
       console.log('Fetching guides with params:', queryParams.toString());
 
-      const response = await axios.get(`http://localhost:5000/api/guides?${queryParams.toString()}`);
+      const response = await axios.get(`${BASE_URL}/api/guides?${queryParams.toString()}`);
       setGuides(response.data.data.guides || response.data.data);
       setLoading(false);
     } catch (error) {
@@ -159,7 +160,7 @@ const Guides = () => {
       const totalCost = selectedGuide.hourlyRate * requestData.duration;
       
       await axios.post(
-        'http://localhost:5000/api/guide-requests',
+        `${BASE_URL}/api/guide-requests`,
         {
           guideId: selectedGuide._id,
           ...requestData,
@@ -320,7 +321,7 @@ const Guides = () => {
                   <div className="guide-header">
                     <div className="guide-avatar">
                       {guide.photo && guide.photo !== 'default-avatar.png' ? (
-                        <img src={`http://localhost:5000${guide.photo}`} alt={guide.name} className="avatar-image" />
+                        <img src={`${BASE_URL}${guide.photo}`} alt={guide.name} className="avatar-image" />
                       ) : (
                         <div className="avatar-circle">{guide.name?.charAt(0) || 'G'}</div>
                       )}

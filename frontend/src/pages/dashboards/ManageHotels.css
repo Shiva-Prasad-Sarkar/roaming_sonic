@@ -18,7 +18,7 @@
 
 .hotels-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr));
   gap: 25px;
 }
 
@@ -524,7 +524,7 @@
 
 .owner-message {
   padding: 10px;
-  background: #f3f4f6;
+  background: var(--bg-secondary);
   border-radius: 8px;
   font-size: 13px;
   color: var(--text-secondary);
@@ -537,7 +537,7 @@
   }
 
   .hotels-grid {
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 280px), 1fr));
   }
 
   .photo-input,
@@ -552,6 +552,8 @@
 
   .booking-actions {
     width: 100%;
+    flex-direction: row;
+    flex-wrap: wrap;
   }
 
   .header-actions {
@@ -562,5 +564,45 @@
   .tab-buttons {
     width: 100%;
     justify-content: center;
+  }
+}
+
+@media (max-width: 768px) {
+  .manage-hotels {
+    padding: 16px;
+  }
+
+  .hotels-header {
+    flex-direction: column;
+    gap: 12px;
+    align-items: flex-start;
+  }
+
+  .hotels-header h1 {
+    font-size: 26px;
+  }
+
+  .hotels-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .hotel-actions {
+    flex-direction: column;
+  }
+
+  .modal-content {
+    padding: 20px 16px;
+    border-radius: 16px;
+  }
+
+  .modal-actions {
+    flex-direction: column;
+  }
+
+  .modal-actions .btn-primary,
+  .modal-actions .btn-secondary {
+    width: 100%;
+    text-align: center;
   }
 }

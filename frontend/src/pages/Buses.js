@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { BASE_URL } from '../services/api';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import './Buses.css';
@@ -74,7 +75,7 @@ const Buses = () => {
       if (filters.maxFare) queryParams.append('maxFare', filters.maxFare);
       if (filters.minRating) queryParams.append('minRating', filters.minRating);
 
-      const response = await axios.get(`http://localhost:5000/api/buses?${queryParams.toString()}`);
+      const response = await axios.get(`${BASE_URL}/api/buses?${queryParams.toString()}`);
       setBuses(response.data.data);
       setLoading(false);
     } catch (error) {
@@ -140,7 +141,7 @@ const Buses = () => {
   const fetchSeatAvailability = async (busId, date) => {
     try {
       setLoadingSeats(true);
-      const response = await axios.get(`http://localhost:5000/api/buses/${busId}/seats/${date}`);
+      const response = await axios.get(`${BASE_URL}/api/buses/${busId}/seats/${date}`);
       setSeatMap(response.data.data.seatMap);
       setSeatLayout(response.data.data.seatLayout);
       setAvailableSeats(response.data.data.availableSeats);
@@ -273,7 +274,7 @@ const Buses = () => {
       console.log('Booking payload:', bookingPayload);
       
       const response = await axios.post(
-        `http://localhost:5000/api/buses/${selectedBus._id}/book`,
+        `${BASE_URL}/api/buses/${selectedBus._id}/book`,
         bookingPayload,
         {
           headers: { Authorization: `Bearer ${token}` }
@@ -318,7 +319,7 @@ const Buses = () => {
     try {
       const token = localStorage.getItem('token');
       await axios.post(
-        `http://localhost:5000/api/buses/${selectedBus._id}/review`,
+        `${BASE_URL}/api/buses/${selectedBus._id}/review`,
         reviewData,
         {
           headers: { Authorization: `Bearer ${token}` }

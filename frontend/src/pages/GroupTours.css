@@ -195,8 +195,8 @@
 
 .group-tours-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-  gap: 2rem;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 320px), 1fr));
+  gap: 1.75rem;
 }
 
 .group-tour-card {
@@ -473,28 +473,40 @@
 
 @media (max-width: 768px) {
   .group-tours-header {
-    padding: 60px 20px 40px;
+    padding: 80px 16px 40px;
   }
 
   .group-tours-header h1 {
-    font-size: 32px;
+    font-size: 1.85rem;
   }
 
   .group-tours-header p {
-    font-size: 16px;
+    font-size: 15px;
   }
 
   .group-tours-grid {
     grid-template-columns: 1fr;
-    gap: 1.5rem;
+    gap: 1.25rem;
   }
 
   .group-tour-card {
-    padding: 1.25rem;
+    padding: 1.1rem;
   }
 
   .filters-sidebar {
-    padding: 20px;
+    padding: 18px;
+    border-radius: 14px;
+    position: static;
+  }
+}
+
+@media (max-width: 480px) {
+  .group-tours-header {
+    padding: 76px 14px 32px;
+  }
+
+  .group-tours-header h1 {
+    font-size: 1.65rem;
   }
 }
 

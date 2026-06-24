@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import './ChatBot.css';
 
 const ChatBot = () => {
@@ -16,6 +16,7 @@ const ChatBot = () => {
   const [conversationContext, setConversationContext] = useState([]);
   const messagesEndRef = useRef(null);
   const navigate = useNavigate();
+  const location = useLocation();
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -24,6 +25,10 @@ const ChatBot = () => {
   useEffect(() => {
     scrollToBottom();
   }, [messages]);
+
+  useEffect(() => {
+    setIsOpen(false);
+  }, [location.pathname]);
 
   const quickReplies = [
     { text: '🏨 Hotels', query: 'show me hotels' },
@@ -544,6 +549,7 @@ const ChatBot = () => {
                               return;
                             }
                             navigate(path);
+                            setIsOpen(false);
                           }}
                         >
                           {link.text} →

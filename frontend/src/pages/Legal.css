@@ -1,7 +1,7 @@
 /* Legal Pages Styles */
 .legal-container {
   min-height: 100vh;
-  background: #f8f9fa;
+  background: var(--bg-secondary);
   padding: 40px 20px;
 }
 
@@ -28,10 +28,11 @@
 .legal-content {
   max-width: 900px;
   margin: 0 auto;
-  background: white;
-  padding: 60px;
-  border-radius: 12px;
-  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+  background: var(--card-bg);
+  padding: 52px 56px;
+  border-radius: 16px;
+  box-shadow: 0 5px 20px var(--shadow);
+  border: 1px solid var(--border-color);
   line-height: 1.8;
 }
 
@@ -44,7 +45,7 @@
 }
 
 .legal-section h2 {
-  color: #333;
+  color: var(--text-primary);
   font-size: 28px;
   margin-bottom: 20px;
   padding-bottom: 10px;
@@ -52,13 +53,13 @@
 }
 
 .legal-section h3 {
-  color: #555;
+  color: var(--text-primary);
   font-size: 22px;
   margin: 25px 0 15px;
 }
 
 .legal-section p {
-  color: #666;
+  color: var(--text-secondary);
   font-size: 16px;
   margin-bottom: 15px;
 }
@@ -70,7 +71,7 @@
 }
 
 .legal-section ul li {
-  color: #666;
+  color: var(--text-secondary);
   font-size: 16px;
   margin-bottom: 12px;
   padding-left: 30px;
@@ -87,7 +88,7 @@
 }
 
 .legal-section strong {
-  color: #333;
+  color: var(--text-primary);
   font-weight: 600;
 }
 
@@ -116,20 +117,30 @@
 
 /* Responsive Design */
 @media (max-width: 768px) {
+  .legal-container {
+    padding: 24px 14px;
+  }
+
+  .legal-header {
+    padding: 32px 20px;
+    border-radius: 12px;
+  }
+
   .legal-header h1 {
-    font-size: 32px;
+    font-size: 30px;
   }
 
   .legal-content {
-    padding: 40px 25px;
+    padding: 32px 24px;
+    border-radius: 12px;
   }
 
   .legal-section h2 {
-    font-size: 24px;
+    font-size: 22px;
   }
 
   .legal-section h3 {
-    font-size: 20px;
+    font-size: 18px;
   }
 
   .legal-section p,
@@ -144,22 +155,27 @@
   }
 
   .legal-header {
-    padding: 30px 15px;
+    padding: 28px 16px;
   }
 
   .legal-header h1 {
-    font-size: 28px;
+    font-size: 26px;
   }
 
   .legal-content {
-    padding: 30px 20px;
+    padding: 24px 16px;
   }
 
   .legal-section h2 {
-    font-size: 22px;
+    font-size: 20px;
   }
 
   .legal-section h3 {
-    font-size: 18px;
+    font-size: 17px;
+  }
+
+  .legal-section p,
+  .legal-section ul li {
+    font-size: 14px;
   }
 }

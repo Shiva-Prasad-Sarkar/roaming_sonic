@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import DashboardLayout from '../../components/DashboardLayout';
 import { useAuth } from '../../context/AuthContext';
-import { userService } from '../../services/api';
+import { userService , BASE_URL } from '../../services/api';
 import axios from 'axios';
 
 const GuideDashboard = () => {
@@ -102,7 +102,7 @@ const GuideDashboard = () => {
   const fetchRequests = async () => {
     try {
       const token = localStorage.getItem('token');
-      const response = await axios.get('http://localhost:5000/api/guide-requests/guide', {
+      const response = await axios.get(`${BASE_URL}/api/guide-requests/guide`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       setRequests(response.data.data);
@@ -157,7 +157,7 @@ const GuideDashboard = () => {
       setUploadingPhoto(true);
       const token = localStorage.getItem('token');
       const response = await axios.post(
-        'http://localhost:5000/api/users/upload-photo',
+        `${BASE_URL}/api/users/upload-photo`,
         formDataUpload,
         {
           headers: {
@@ -211,7 +211,7 @@ const GuideDashboard = () => {
     try {
       const token = localStorage.getItem('token');
       await axios.patch(
-        `http://localhost:5000/api/guide-requests/${requestId}`,
+        `${BASE_URL}/api/guide-requests/${requestId}`,
         { status, responseMessage },
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -231,7 +231,7 @@ const GuideDashboard = () => {
     try {
       const token = localStorage.getItem('token');
       const response = await axios.post(
-        'http://localhost:5000/api/guides/reapply',
+        `${BASE_URL}/api/guides/reapply`,
         {},
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -413,7 +413,7 @@ const GuideDashboard = () => {
           }}>
             {profile?.photo && profile.photo !== 'default-avatar.png' ? (
               <img 
-                src={`http://localhost:5000${profile.photo}`} 
+                src={`${BASE_URL}${profile.photo}`} 
                 alt={profile.name}
                 style={{width: '100%', height: '100%', objectFit: 'cover'}}
               />

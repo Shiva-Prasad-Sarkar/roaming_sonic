@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { BASE_URL } from '../../services/api';
 import axios from 'axios';
 import './ManageCoupons.css';
 
@@ -29,7 +30,7 @@ const ManageCoupons = () => {
   const fetchCoupons = async () => {
     try {
       const token = localStorage.getItem('token');
-      const response = await axios.get('http://localhost:5000/api/coupons', {
+      const response = await axios.get(`${BASE_URL}/api/coupons`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       setCoupons(response.data.data);
@@ -90,14 +91,14 @@ const ManageCoupons = () => {
 
       if (editMode && selectedCoupon) {
         await axios.put(
-          `http://localhost:5000/api/coupons/${selectedCoupon._id}`,
+          `${BASE_URL}/api/coupons/${selectedCoupon._id}`,
           submitData,
           { headers: { Authorization: `Bearer ${token}` } }
         );
         alert('✅ Coupon updated successfully');
       } else {
         await axios.post(
-          'http://localhost:5000/api/coupons',
+          `${BASE_URL}/api/coupons`,
           submitData,
           { headers: { Authorization: `Bearer ${token}` } }
         );
@@ -137,7 +138,7 @@ const ManageCoupons = () => {
 
     try {
       const token = localStorage.getItem('token');
-      await axios.delete(`http://localhost:5000/api/coupons/${id}`, {
+      await axios.delete(`${BASE_URL}/api/coupons/${id}`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       alert('✅ Coupon deleted successfully');
@@ -151,7 +152,7 @@ const ManageCoupons = () => {
     try {
       const token = localStorage.getItem('token');
       await axios.patch(
-        `http://localhost:5000/api/coupons/${id}/toggle`,
+        `${BASE_URL}/api/coupons/${id}/toggle`,
         {},
         { headers: { Authorization: `Bearer ${token}` } }
       );

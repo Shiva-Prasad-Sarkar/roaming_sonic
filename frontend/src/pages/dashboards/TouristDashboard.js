@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import DashboardLayout from '../../components/DashboardLayout';
 import { useAuth } from '../../context/AuthContext';
-import { userService } from '../../services/api';
+import { userService , BASE_URL } from '../../services/api';
 import axios from 'axios';
 import html2pdf from 'html2pdf.js';
 import PaymentForm from '../../components/PaymentForm';
@@ -124,7 +124,7 @@ const TouristDashboard = () => {
   const fetchGuideRequests = async () => {
     try {
       const token = localStorage.getItem('token');
-      const response = await axios.get('http://localhost:5000/api/guide-requests/tourist', {
+      const response = await axios.get(`${BASE_URL}/api/guide-requests/tourist`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       setGuideRequests(response.data.data);
@@ -137,7 +137,7 @@ const TouristDashboard = () => {
     setBookingsLoading(true);
     try {
       const token = localStorage.getItem('token');
-      const response = await axios.get('http://localhost:5000/api/bookings/my-bookings', {
+      const response = await axios.get(`${BASE_URL}/api/bookings/my-bookings`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       setBookings(response.data.data);
@@ -152,7 +152,7 @@ const TouristDashboard = () => {
     setComplaintsLoading(true);
     try {
       const token = localStorage.getItem('token');
-      const response = await axios.get('http://localhost:5000/api/complaints/my-complaints', {
+      const response = await axios.get(`${BASE_URL}/api/complaints/my-complaints`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       setComplaints(response.data.data);
@@ -170,7 +170,7 @@ const TouristDashboard = () => {
     try {
       const token = localStorage.getItem('token');
       const response = await axios.post(
-        'http://localhost:5000/api/users/claim-coupon',
+        `${BASE_URL}/api/users/claim-coupon`,
         {},
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -193,7 +193,7 @@ const TouristDashboard = () => {
     try {
       const token = localStorage.getItem('token');
       const response = await axios.patch(
-        `http://localhost:5000/api/bookings/${bookingId}/cancel`,
+        `${BASE_URL}/api/bookings/${bookingId}/cancel`,
         {},
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -214,7 +214,7 @@ const TouristDashboard = () => {
         return;
       }
       
-      const url = `http://localhost:5000/api/bookings/${bookingId}/ticket`;
+      const url = `${BASE_URL}/api/bookings/${bookingId}/ticket`;
       
       console.log('Fetching ticket from:', url);
       
@@ -399,7 +399,7 @@ const TouristDashboard = () => {
     try {
       const token = localStorage.getItem('token');
       await axios.post(
-        `http://localhost:5000/api/tours/${selectedBooking.tour._id}/review`,
+        `${BASE_URL}/api/tours/${selectedBooking.tour._id}/review`,
         tourReviewData,
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -441,7 +441,7 @@ const TouristDashboard = () => {
     try {
       const token = localStorage.getItem('token');
       await axios.delete(
-        `http://localhost:5000/api/users/wishlist/${hotelId}`,
+        `${BASE_URL}/api/users/wishlist/${hotelId}`,
         { headers: { Authorization: `Bearer ${token}` } }
       );
       alert('✅ Hotel removed from wishlist!');
@@ -468,7 +468,7 @@ const TouristDashboard = () => {
       const totalAmount = nights * (room?.pricePerNight || 0) * hotelBookingData.guests;
 
       await axios.post(
-        'http://localhost:5000/api/bookings',
+        `${BASE_URL}/api/bookings`,
         {
           bookingType: 'hotel',
           hotel: selectedWishlistHotel._id,
@@ -485,7 +485,7 @@ const TouristDashboard = () => {
 
       // Remove from wishlist after booking
       await axios.delete(
-        `http://localhost:5000/api/users/wishlist/${selectedWishlistHotel._id}`,
+        `${BASE_URL}/api/users/wishlist/${selectedWishlistHotel._id}`,
         { headers: { Authorization: `Bearer ${token}` } }
       );
 
@@ -513,7 +513,7 @@ const TouristDashboard = () => {
       const totalAmount = selectedWishlistTour.price * tourBookingData.numberOfMembers;
       
       await axios.post(
-        'http://localhost:5000/api/bookings',
+        `${BASE_URL}/api/bookings`,
         {
           bookingType: 'tour',
           tour: selectedWishlistTour._id,
@@ -566,7 +566,7 @@ const TouristDashboard = () => {
     try {
       const token = localStorage.getItem('token');
       await axios.post(
-        `http://localhost:5000/api/hotel-bookings/${selectedBooking._id}/review`,
+        `${BASE_URL}/api/hotel-bookings/${selectedBooking._id}/review`,
         hotelReviewData,
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -675,7 +675,7 @@ const TouristDashboard = () => {
     try {
       const token = localStorage.getItem('token');
       await axios.post(
-        `http://localhost:5000/api/guide-requests/${selectedRequest._id}/review`,
+        `${BASE_URL}/api/guide-requests/${selectedRequest._id}/review`,
         reviewData,
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -696,7 +696,7 @@ const TouristDashboard = () => {
     try {
       const token = localStorage.getItem('token');
       await axios.delete(
-        `http://localhost:5000/api/guide-requests/${requestId}`,
+        `${BASE_URL}/api/guide-requests/${requestId}`,
         { headers: { Authorization: `Bearer ${token}` } }
       );
       alert('Request cancelled successfully!');
@@ -718,7 +718,7 @@ const TouristDashboard = () => {
       setUploadingPhoto(true);
       const token = localStorage.getItem('token');
       const response = await axios.post(
-        'http://localhost:5000/api/users/upload-photo',
+        `${BASE_URL}/api/users/upload-photo`,
         formDataUpload,
         {
           headers: {
@@ -745,7 +745,7 @@ const TouristDashboard = () => {
   const fetchMyGroupTours = async () => {
     try {
       const token = localStorage.getItem('token');
-      const response = await axios.get('http://localhost:5000/api/group-tours/my/tours', {
+      const response = await axios.get(`${BASE_URL}/api/group-tours/my/tours`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       setMyGroupTours(response.data.data || response.data);
@@ -757,7 +757,7 @@ const TouristDashboard = () => {
   const fetchJoinedGroupTours = async () => {
     try {
       const token = localStorage.getItem('token');
-      const response = await axios.get('http://localhost:5000/api/group-tours/my/joined', {
+      const response = await axios.get(`${BASE_URL}/api/group-tours/my/joined`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       const tours = response.data.data || response.data;
@@ -774,7 +774,7 @@ const TouristDashboard = () => {
 
   const fetchTourPackages = async () => {
     try {
-      const response = await axios.get('http://localhost:5000/api/tours');
+      const response = await axios.get(`${BASE_URL}/api/tours`);
       setTourPackages(response.data);
     } catch (error) {
       console.error('Error fetching tour packages:', error);
@@ -808,7 +808,7 @@ const TouristDashboard = () => {
     try {
       const token = localStorage.getItem('token');
       console.log('Submitting group tour data:', groupTourForm);
-      const response = await axios.post('http://localhost:5000/api/group-tours', groupTourForm, {
+      const response = await axios.post(`${BASE_URL}/api/group-tours`, groupTourForm, {
         headers: { Authorization: `Bearer ${token}` }
       });
       console.log('Group tour created:', response.data);
@@ -826,7 +826,7 @@ const TouristDashboard = () => {
   const viewGroupTourMembers = async (groupTourId) => {
     try {
       const token = localStorage.getItem('token');
-      const response = await axios.get(`http://localhost:5000/api/group-tours/${groupTourId}`, {
+      const response = await axios.get(`${BASE_URL}/api/group-tours/${groupTourId}`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       console.log('Group tour details:', response.data);
@@ -844,7 +844,7 @@ const TouristDashboard = () => {
     try {
       const token = localStorage.getItem('token');
       await axios.patch(
-        `http://localhost:5000/api/group-tours/${groupTourId}/members/${userId}`,
+        `${BASE_URL}/api/group-tours/${groupTourId}/members/${userId}`,
         { status: 'approved' },
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -863,7 +863,7 @@ const TouristDashboard = () => {
     try {
       const token = localStorage.getItem('token');
       await axios.patch(
-        `http://localhost:5000/api/group-tours/${groupTourId}/members/${userId}`,
+        `${BASE_URL}/api/group-tours/${groupTourId}/members/${userId}`,
         { status: 'rejected' },
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -881,7 +881,7 @@ const TouristDashboard = () => {
     
     try {
       const token = localStorage.getItem('token');
-      await axios.patch(`http://localhost:5000/api/group-tours/${groupTourId}/cancel`, {}, {
+      await axios.patch(`${BASE_URL}/api/group-tours/${groupTourId}/cancel`, {}, {
         headers: { Authorization: `Bearer ${token}` }
       });
       alert('Group tour cancelled successfully');
@@ -898,7 +898,7 @@ const TouristDashboard = () => {
     
     try {
       const token = localStorage.getItem('token');
-      await axios.patch(`http://localhost:5000/api/group-tours/${groupTourId}/complete`, {}, {
+      await axios.patch(`${BASE_URL}/api/group-tours/${groupTourId}/complete`, {}, {
         headers: { Authorization: `Bearer ${token}` }
       });
       alert('Group tour marked as completed');
@@ -922,7 +922,7 @@ const TouristDashboard = () => {
     
     try {
       const token = localStorage.getItem('token');
-      await axios.patch(`http://localhost:5000/api/group-tours/${groupTourId}/leave`, {}, {
+      await axios.patch(`${BASE_URL}/api/group-tours/${groupTourId}/leave`, {}, {
         headers: { Authorization: `Bearer ${token}` }
       });
       const successMessage = isPending 
@@ -1007,7 +1007,7 @@ const TouristDashboard = () => {
               }}>
                 {profile?.photo && profile.photo !== 'default-avatar.png' ? (
                   <img 
-                    src={`http://localhost:5000${profile.photo}`} 
+                    src={`${BASE_URL}${profile.photo}`} 
                     alt={profile.name}
                     style={{width: '100%', height: '100%', objectFit: 'cover'}}
                   />
@@ -1520,7 +1520,7 @@ const TouristDashboard = () => {
                             try {
                               const token = localStorage.getItem('token');
                               await axios.delete(
-                                `http://localhost:5000/api/tours/${tour._id}/wishlist`,
+                                `${BASE_URL}/api/tours/${tour._id}/wishlist`,
                                 { headers: { Authorization: `Bearer ${token}` } }
                               );
                               alert('✅ Tour removed from wishlist!');
@@ -1562,7 +1562,7 @@ const TouristDashboard = () => {
                 <div key={hotel._id} className="wishlist-item">
                   {hotel.photos && hotel.photos.length > 0 ? (
                     <img 
-                      src={`http://localhost:5000${hotel.photos[0].url}`} 
+                      src={`${BASE_URL}${hotel.photos[0].url}`} 
                       alt={hotel.name}
                       style={{
                         width: '100%',

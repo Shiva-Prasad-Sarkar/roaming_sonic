@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { BASE_URL } from '../../services/api';
 import { useLocation, useNavigate } from 'react-router-dom';
 import DashboardLayout from '../../components/DashboardLayout';
 import { useAuth } from '../../context/AuthContext';
@@ -105,8 +106,8 @@ const AdminDashboard = () => {
 
       // Fetch stats
       const [userStatsRes, bookingStatsRes] = await Promise.all([
-        axios.get('http://localhost:5000/api/users/admin/stats', config),
-        axios.get('http://localhost:5000/api/bookings/stats', config)
+        axios.get(`${BASE_URL}/api/users/admin/stats`, config),
+        axios.get(`${BASE_URL}/api/bookings/stats`, config)
       ]);
 
       setStats({
@@ -116,28 +117,28 @@ const AdminDashboard = () => {
 
       // Fetch data for active section
       if (activeSection === 'hotels') {
-        const hotelsRes = await axios.get('http://localhost:5000/api/hotels/admin/all', config);
+        const hotelsRes = await axios.get(`${BASE_URL}/api/hotels/admin/all`, config);
         setHotels(hotelsRes.data.data || []);
       } else if (activeSection === 'guides') {
-        const guidesRes = await axios.get('http://localhost:5000/api/guides/admin/pending', config);
+        const guidesRes = await axios.get(`${BASE_URL}/api/guides/admin/pending`, config);
         setGuides(guidesRes.data.data);
       } else if (activeSection === 'bookings') {
-        const bookingsRes = await axios.get('http://localhost:5000/api/bookings', config);
+        const bookingsRes = await axios.get(`${BASE_URL}/api/bookings`, config);
         setBookings(bookingsRes.data.data);
       } else if (activeSection === 'tours') {
-        const toursRes = await axios.get('http://localhost:5000/api/tours', config);
+        const toursRes = await axios.get(`${BASE_URL}/api/tours`, config);
         setTours(toursRes.data.data);
       } else if (activeSection === 'buses') {
-        const busesRes = await axios.get('http://localhost:5000/api/buses', config);
+        const busesRes = await axios.get(`${BASE_URL}/api/buses`, config);
         setBuses(busesRes.data.data);
       } else if (activeSection === 'users') {
-        const usersRes = await axios.get('http://localhost:5000/api/users/admin/all', config);
+        const usersRes = await axios.get(`${BASE_URL}/api/users/admin/all`, config);
         setUsers(usersRes.data.data);
       } else if (activeSection === 'group-tours') {
-        const groupToursRes = await axios.get('http://localhost:5000/api/group-tours/admin/pending', config);
+        const groupToursRes = await axios.get(`${BASE_URL}/api/group-tours/admin/pending`, config);
         setGroupTours(groupToursRes.data.data || []);
       } else if (activeSection === 'complaints') {
-        const complaintsRes = await axios.get('http://localhost:5000/api/complaints', config);
+        const complaintsRes = await axios.get(`${BASE_URL}/api/complaints`, config);
         setComplaints(complaintsRes.data.data || []);
       }
     } catch (error) {
@@ -159,7 +160,7 @@ const AdminDashboard = () => {
     try {
       const token = localStorage.getItem('token');
       await axios.put(
-        `http://localhost:5000/api/hotels/${hotelId}/verify`,
+        `${BASE_URL}/api/hotels/${hotelId}/verify`,
         { verificationStatus: status },
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -177,7 +178,7 @@ const AdminDashboard = () => {
     try {
       const token = localStorage.getItem('token');
       await axios.delete(
-        `http://localhost:5000/api/hotels/${hotelId}`,
+        `${BASE_URL}/api/hotels/${hotelId}`,
         { headers: { Authorization: `Bearer ${token}` } }
       );
       alert('Hotel deleted successfully');
@@ -193,7 +194,7 @@ const AdminDashboard = () => {
     try {
       const token = localStorage.getItem('token');
       await axios.patch(
-        `http://localhost:5000/api/guides/${guideId}/approval`,
+        `${BASE_URL}/api/guides/${guideId}/approval`,
         { status: approvalStatus },
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -210,7 +211,7 @@ const AdminDashboard = () => {
     try {
       const token = localStorage.getItem('token');
       await axios.patch(
-        `http://localhost:5000/api/group-tours/${groupTourId}/admin-approval`,
+        `${BASE_URL}/api/group-tours/${groupTourId}/admin-approval`,
         { status: 'approved', adminNotes },
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -229,7 +230,7 @@ const AdminDashboard = () => {
     try {
       const token = localStorage.getItem('token');
       await axios.patch(
-        `http://localhost:5000/api/group-tours/${groupTourId}/admin-approval`,
+        `${BASE_URL}/api/group-tours/${groupTourId}/admin-approval`,
         { status: 'rejected', adminNotes: reason },
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -246,7 +247,7 @@ const AdminDashboard = () => {
     try {
       const token = localStorage.getItem('token');
       await axios.patch(
-        `http://localhost:5000/api/bookings/${bookingId}/status`,
+        `${BASE_URL}/api/bookings/${bookingId}/status`,
         { status },
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -263,7 +264,7 @@ const AdminDashboard = () => {
     try {
       const token = localStorage.getItem('token');
       await axios.patch(
-        `http://localhost:5000/api/complaints/${complaintId}`,
+        `${BASE_URL}/api/complaints/${complaintId}`,
         updates,
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -326,7 +327,7 @@ const AdminDashboard = () => {
       }
 
       if (editingTour) {
-        await axios.put(`http://localhost:5000/api/tours/${editingTour}`, formData, {
+        await axios.put(`${BASE_URL}/api/tours/${editingTour}`, formData, {
           headers: { 
             Authorization: `Bearer ${token}`,
             'Content-Type': 'multipart/form-data'
@@ -334,7 +335,7 @@ const AdminDashboard = () => {
         });
         alert('Tour updated successfully');
       } else {
-        await axios.post('http://localhost:5000/api/tours', formData, {
+        await axios.post(`${BASE_URL}/api/tours`, formData, {
           headers: { 
             Authorization: `Bearer ${token}`,
             'Content-Type': 'multipart/form-data'
@@ -395,7 +396,7 @@ const AdminDashboard = () => {
     
     try {
       const token = localStorage.getItem('token');
-      await axios.delete(`http://localhost:5000/api/tours/${tourId}`, {
+      await axios.delete(`${BASE_URL}/api/tours/${tourId}`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       alert('Tour deleted successfully');
@@ -411,7 +412,7 @@ const AdminDashboard = () => {
     
     try {
       const token = localStorage.getItem('token');
-      await axios.patch(`http://localhost:5000/api/tours/${tourId}/end`, {}, {
+      await axios.patch(`${BASE_URL}/api/tours/${tourId}/end`, {}, {
         headers: { Authorization: `Bearer ${token}` }
       });
       alert('✅ Tour marked as ended successfully. Member count reset to 0.');
@@ -435,10 +436,10 @@ const AdminDashboard = () => {
       };
 
       if (editingBus) {
-        await axios.put(`http://localhost:5000/api/buses/${editingBus}`, busData, config);
+        await axios.put(`${BASE_URL}/api/buses/${editingBus}`, busData, config);
         alert('Bus updated successfully');
       } else {
-        await axios.post('http://localhost:5000/api/buses', busData, config);
+        await axios.post(`${BASE_URL}/api/buses`, busData, config);
         alert('Bus added successfully');
       }
 
@@ -495,7 +496,7 @@ const AdminDashboard = () => {
     
     try {
       const token = localStorage.getItem('token');
-      await axios.delete(`http://localhost:5000/api/buses/${busId}`, {
+      await axios.delete(`${BASE_URL}/api/buses/${busId}`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       alert('Bus deleted successfully');
@@ -512,7 +513,7 @@ const AdminDashboard = () => {
     
     try {
       const token = localStorage.getItem('token');
-      await axios.delete(`http://localhost:5000/api/users/admin/${userId}`, {
+      await axios.delete(`${BASE_URL}/api/users/admin/${userId}`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       alert('User deleted successfully');
@@ -527,7 +528,7 @@ const AdminDashboard = () => {
     try {
       const token = localStorage.getItem('token');
       await axios.patch(
-        `http://localhost:5000/api/users/admin/${userId}/role`,
+        `${BASE_URL}/api/users/admin/${userId}/role`,
         { role: newRole },
         { headers: { Authorization: `Bearer ${token}` } }
       );

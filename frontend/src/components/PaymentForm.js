@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { BASE_URL } from '../services/api';
 import axios from 'axios';
 import './PaymentForm.css';
 
@@ -52,7 +53,7 @@ const PaymentForm = ({ totalAmount, onPaymentSubmit, onCancel, bookingType }) =>
 
     setCouponLoading(true);
     try {
-      const response = await axios.post('http://localhost:5000/api/coupons/validate', {
+      const response = await axios.post(`${BASE_URL}/api/coupons/validate`, {
         code: couponCode,
         serviceType: bookingType || 'tour',
         amount: totalAmount

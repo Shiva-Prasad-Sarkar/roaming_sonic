@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { BASE_URL } from '../services/api';
 import { useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';
 import { useAuth } from '../context/AuthContext';
@@ -51,7 +52,7 @@ const Tours = () => {
 
   const fetchTours = async () => {
     try {
-      const response = await axios.get('http://localhost:5000/api/tours');
+      const response = await axios.get(`${BASE_URL}/api/tours`);
       setTours(response.data.data);
       setFilteredTours(response.data.data);
     } catch (error) {
@@ -64,7 +65,7 @@ const Tours = () => {
   const fetchWishlist = async () => {
     try {
       const token = localStorage.getItem('token');
-      const response = await axios.get('http://localhost:5000/api/tours/wishlist/my-wishlist', {
+      const response = await axios.get(`${BASE_URL}/api/tours/wishlist/my-wishlist`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       setWishlist(response.data.data.map(tour => tour._id));
@@ -87,13 +88,13 @@ const Tours = () => {
       const isInWishlist = wishlist.includes(tourId);
 
       if (isInWishlist) {
-        await axios.delete(`http://localhost:5000/api/tours/${tourId}/wishlist`, {
+        await axios.delete(`${BASE_URL}/api/tours/${tourId}/wishlist`, {
           headers: { Authorization: `Bearer ${token}` }
         });
         setWishlist(wishlist.filter(id => id !== tourId));
         alert('Tour removed from wishlist');
       } else {
-        await axios.post(`http://localhost:5000/api/tours/${tourId}/wishlist`, {}, {
+        await axios.post(`${BASE_URL}/api/tours/${tourId}/wishlist`, {}, {
           headers: { Authorization: `Bearer ${token}` }
         });
         setWishlist([...wishlist, tourId]);
@@ -125,7 +126,7 @@ const Tours = () => {
     try {
       const token = localStorage.getItem('token');
       const response = await axios.post(
-        `http://localhost:5000/api/tours/${selectedTour._id}/review`,
+        `${BASE_URL}/api/tours/${selectedTour._id}/review`,
         reviewData,
         {
           headers: { Authorization: `Bearer ${token}` }
@@ -219,7 +220,7 @@ const Tours = () => {
       const totalAmount = selectedTour.price * bookingData.numberOfMembers;
       
       const response = await axios.post(
-        'http://localhost:5000/api/bookings',
+        `${BASE_URL}/api/bookings`,
         {
           bookingType: 'tour',
           tour: selectedTour._id,

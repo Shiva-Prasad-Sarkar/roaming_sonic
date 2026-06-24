@@ -39,10 +39,10 @@
 }
 
 .auth-card {
-  background: white;
-  border-radius: 20px;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-  padding: 40px;
+  background: #ffffff;
+  border-radius: 24px;
+  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.28);
+  padding: 44px 40px;
   width: 100%;
   max-width: 450px;
   animation: fadeInScale 0.5s ease-out;
@@ -188,12 +188,67 @@
 }
 
 @media (max-width: 768px) {
-  .auth-card {
-    padding: 30px 20px;
+  .auth-container {
+    padding: 60px 14px 20px;
+    align-items: flex-start;
+    padding-top: 80px;
   }
-  
+
+  .auth-card {
+    padding: 32px 20px;
+    width: 100%;
+    margin: 0 auto;
+    max-width: 100%;
+    border-radius: 20px;
+  }
+
+  .register-card {
+    max-width: 100%;
+  }
+
   .auth-header h2 {
     font-size: 24px;
+  }
+
+  .auth-header p {
+    font-size: 14px;
+  }
+
+  .home-btn-auth {
+    top: 14px;
+    left: 14px;
+    padding: 8px 16px;
+    font-size: 13px;
+  }
+
+  .auth-form {
+    gap: 16px;
+  }
+
+  .form-group input,
+  .form-group select {
+    padding: 11px 13px;
+    font-size: 15px;
+  }
+
+  .btn-primary {
+    padding: 13px 24px;
+    font-size: 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .auth-container {
+    padding: 72px 10px 16px;
+  }
+
+  .auth-card {
+    padding: 26px 16px;
+    border-radius: 18px;
+  }
+
+  .auth-header h2 {
+    font-size: 22px;
   }
 }
 

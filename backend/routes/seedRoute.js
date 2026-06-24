@@ -84,7 +84,7 @@ const runSeed = async (secret, res) => {
 
     // 2. Hotels
     await Hotel.deleteMany({});
-    const hotels = await Hotel.insertMany(hotelsData.map(h => ({ ...h, owner: admin._id })));
+    const hotels = await Hotel.insertMany(hotelsData.map(h => ({ ...h, owner: admin._id, isVerified: true, isActive: true })));
     results.hotels = hotels.length;
 
     // 3. Buses
@@ -97,7 +97,7 @@ const runSeed = async (secret, res) => {
     await User.deleteMany({ email: { $in: guideEmails } });
     let guideCount = 0;
     for (const g of guidesData) {
-      const guide = new User(g);
+      const guide = new User({ ...g, isApproved: true, approvalStatus: 'approved' });
       await guide.save();
       guideCount++;
     }

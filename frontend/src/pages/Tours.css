@@ -681,74 +681,123 @@
   }
 
   .tours-header {
-    padding: 80px 16px 40px;
+    padding: 72px 16px 36px;
   }
 
   .tours-header h1 {
-    font-size: 1.85rem;
+    font-size: 1.75rem;
   }
 
   .tours-header p {
-    font-size: 15px;
+    font-size: 14px;
   }
 
   .tours-container {
-    padding: 1rem;
-    gap: 1rem;
+    padding: 12px;
+    gap: 12px;
   }
 
   .tours-grid {
     grid-template-columns: 1fr;
-    gap: 16px;
+    gap: 14px;
   }
 
   .tour-image {
-    height: 210px;
+    height: 195px;
   }
 
   .tour-details {
-    padding: 1.1rem;
+    padding: 14px;
   }
 
+  .tour-details h3 {
+    font-size: 1.1rem;
+  }
+
+  .tour-category {
+    font-size: 11px;
+    padding: 5px 12px;
+  }
+
+  /* Keep footer as row */
   .tour-footer {
-    flex-direction: column;
-    gap: 12px;
-    align-items: stretch;
+    flex-direction: row;
+    gap: 10px;
+    align-items: center;
+    padding-top: 14px;
   }
 
-  .book-btn {
-    width: 100%;
-    text-align: center;
-    justify-content: center;
+  .tour-price {
+    flex: 1;
   }
 
   .price-amount {
-    font-size: 24px;
+    font-size: 22px;
+  }
+
+  .book-btn {
+    padding: 10px 18px;
+    font-size: 13px;
+    white-space: nowrap;
+    flex-shrink: 0;
+    width: auto;
+    text-align: center;
   }
 
   .filter-section {
     border-radius: 14px;
     padding: 16px;
   }
+
+  .tour-includes {
+    padding: 12px;
+    margin-bottom: 1rem;
+  }
+
+  .tour-info {
+    padding: 0.75rem 0;
+    margin-bottom: 1rem;
+  }
 }
 
 @media (max-width: 480px) {
   .tours-header {
-    padding: 76px 14px 32px;
+    padding: 68px 12px 28px;
   }
 
   .tours-header h1 {
-    font-size: 1.65rem;
+    font-size: 1.5rem;
   }
 
   .tour-image {
-    height: 185px;
+    height: 175px;
+  }
+
+  .tour-details h3 {
+    font-size: 1rem;
+  }
+
+  .price-amount {
+    font-size: 20px;
+  }
+
+  .book-btn {
+    padding: 9px 14px;
+    font-size: 12px;
   }
 
   .tour-info {
     flex-wrap: wrap;
     justify-content: flex-start;
-    gap: 12px;
+    gap: 10px;
+  }
+
+  .info-item {
+    font-size: 12px;
+  }
+
+  .info-item .icon {
+    font-size: 17px;
   }
 }
 

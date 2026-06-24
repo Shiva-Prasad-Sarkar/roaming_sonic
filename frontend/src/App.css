@@ -667,3 +667,57 @@ code {
     padding-right: 12px;
   }
 }
+
+/* ─── Bottom tab bar clearance on mobile ─────────────────────────────────── */
+@media (max-width: 768px) {
+  /* All page wrappers get extra bottom space so content doesn't hide under the fixed tab bar */
+  .home-container,
+  .tours-page,
+  .buses-page,
+  .hotels-page,
+  .guides-page,
+  .group-tours-page,
+  .dashboard-container,
+  .auth-container,
+  .hotel-detail-page,
+  .payment-form-container,
+  .legal-page,
+  .about-page,
+  .contact-page,
+  .privacy-page,
+  .terms-page {
+    padding-bottom: 72px !important;
+  }
+
+  /* Card h3/h4 titles — slightly smaller on mobile */
+  .hotel-info h3,
+  .guide-basic-info h3,
+  .tour-title,
+  .bus-name {
+    font-size: 17px;
+  }
+
+  /* Specialization / language badges — more compact */
+  .specialization-tag,
+  .language-badge,
+  .guide-language,
+  .hotel-facilities span,
+  .amenity-tag {
+    font-size: 11px;
+    padding: 4px 10px;
+  }
+
+  /* Price numbers */
+  .price-value,
+  .rate-value,
+  .price-amount {
+    font-size: 22px;
+  }
+
+  /* Filter sidebar headers */
+  .filters-header h3,
+  .filter-section h3,
+  .filter-section .filter-title {
+    font-size: 16px;
+  }
+}

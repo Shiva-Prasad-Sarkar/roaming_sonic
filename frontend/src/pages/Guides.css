@@ -711,65 +711,115 @@
 
 @media (max-width: 768px) {
   .guides-header {
-    padding: 80px 16px 40px;
+    padding: 72px 16px 36px;
   }
 
   .guides-header h1 {
-    font-size: 1.85rem;
+    font-size: 1.75rem;
   }
 
   .guides-header p {
-    font-size: 15px;
+    font-size: 14px;
   }
 
   .guides-grid {
     grid-template-columns: 1fr;
-    gap: 16px;
+    gap: 14px;
   }
 
   .guide-card {
-    padding: 20px 18px;
+    padding: 16px 14px;
   }
 
   .guide-header {
-    gap: 14px;
+    gap: 12px;
+    margin-bottom: 14px;
   }
 
   .avatar-circle,
   .avatar-image {
-    width: 68px;
-    height: 68px;
-    font-size: 28px;
+    width: 60px;
+    height: 60px;
+    font-size: 24px;
   }
 
   .guide-basic-info h3 {
-    font-size: 20px;
+    font-size: 17px;
+    margin-bottom: 4px;
   }
 
-  .guide-footer {
-    flex-direction: column;
-    gap: 14px;
-    align-items: stretch;
-    padding-top: 18px;
-    margin-top: 18px;
+  .guide-rating {
+    font-size: 13px;
   }
 
-  .contact-btn {
-    text-align: center;
-    display: block;
-    width: 100%;
+  .guide-bio {
+    padding: 12px;
+    margin-bottom: 14px;
+    border-radius: 10px;
   }
 
-  .rate-value {
-    font-size: 26px;
+  .guide-bio p {
+    font-size: 13px;
+    line-height: 1.5;
   }
 
   .guide-details {
-    padding: 16px;
+    padding: 12px;
+    gap: 10px;
+    margin-bottom: 14px;
+    border-radius: 10px;
+  }
+
+  .detail-item {
+    font-size: 13px;
+    gap: 8px;
+  }
+
+  .detail-item .icon {
+    font-size: 17px;
+  }
+
+  .guide-specializations {
+    gap: 6px;
+    margin-bottom: 14px;
+  }
+
+  .specialization-tag {
+    font-size: 11px;
+    padding: 4px 10px;
+  }
+
+  /* Keep footer as a row: price left, button right */
+  .guide-footer {
+    flex-direction: row;
+    gap: 10px;
+    align-items: center;
+    padding-top: 14px;
+    margin-top: 14px;
+  }
+
+  .guide-rate {
+    flex: 1;
+  }
+
+  .rate-value {
+    font-size: 22px;
+  }
+
+  .rate-unit {
+    font-size: 12px;
+  }
+
+  .contact-btn {
+    padding: 10px 16px;
+    font-size: 13px;
+    white-space: nowrap;
+    flex-shrink: 0;
+    text-align: center;
   }
 
   .modal-content {
-    padding: 28px 20px;
+    padding: 24px 16px;
   }
 
   .request-form .form-row {
@@ -779,15 +829,35 @@
 
 @media (max-width: 480px) {
   .guides-header {
-    padding: 76px 14px 32px;
+    padding: 68px 12px 28px;
   }
 
   .guides-header h1 {
-    font-size: 1.65rem;
+    font-size: 1.5rem;
   }
 
   .guide-card {
-    padding: 18px 14px;
+    padding: 14px 12px;
+  }
+
+  .avatar-circle,
+  .avatar-image {
+    width: 54px;
+    height: 54px;
+    font-size: 22px;
+  }
+
+  .guide-basic-info h3 {
+    font-size: 16px;
+  }
+
+  .rate-value {
+    font-size: 20px;
+  }
+
+  .contact-btn {
+    padding: 9px 13px;
+    font-size: 12px;
   }
 
   .specialization-buttons {

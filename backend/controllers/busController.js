@@ -67,16 +67,16 @@ exports.getAllBuses = async (req, res) => {
 
     const buses = await Bus.find(query).sort(sortOption);
 
-    // Calculate daily available seats if date is provided
-    let busesWithAvailability = buses;
-    if (date) {
-      busesWithAvailability = buses.map(bus => {
-        const busObj = bus.toObject();
-        const availability = bus.getSeatAvailability(date);
-        busObj.availableSeats = availability.availableSeats.length;
-        return busObj;
-      });
-    }
+    // Always compute available seats from daily seat data.
+    // Use the requested date if provided, otherwise fall back to today so
+    // seat counts reflect actual bookings even when no date filter is active.
+    const targetDate = date || new Date().toISOString().split('T')[0];
+    const busesWithAvailability = buses.map(bus => {
+      const busObj = bus.toObject();
+      const availability = bus.getSeatAvailability(targetDate);
+      busObj.availableSeats = availability.availableSeats.length;
+      return busObj;
+    });
 
     res.status(200).json({
       success: true,

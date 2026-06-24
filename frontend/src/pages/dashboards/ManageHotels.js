@@ -1,11 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { BASE_URL } from '../../services/api';
 import axios from 'axios';
-import { useAuth } from '../../context/AuthContext';
 import './ManageHotels.css';
 
 const ManageHotels = () => {
-  const { user } = useAuth();
   const [hotels, setHotels] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [editingHotel, setEditingHotel] = useState(null);

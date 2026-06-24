@@ -6,30 +6,12 @@ import ManageHotels from './ManageHotels';
 import axios from 'axios';
 
 const HotelOwnerDashboard = () => {
-  const { user, updateUser } = useAuth();
-  const [hotels, setHotels] = useState([]);
+  const { updateUser } = useAuth();
   const [loading, setLoading] = useState(true);
-  const [showAddForm, setShowAddForm] = useState(false);
   const [profile, setProfile] = useState(null);
   const [uploadingPhoto, setUploadingPhoto] = useState(false);
-  const [formData, setFormData] = useState({
-    name: '',
-    description: '',
-    category: 'hotel',
-    phone: '',
-    email: '',
-    'address.city': '',
-    'address.district': '',
-    'address.division': 'Dhaka',
-    'facilities.wifi': false,
-    'facilities.parking': false,
-    'facilities.restaurant': false,
-    'facilities.swimmingPool': false,
-    'facilities.gym': false
-  });
 
   useEffect(() => {
-    fetchHotels();
     fetchProfile();
   }, []);
 
@@ -42,29 +24,9 @@ const HotelOwnerDashboard = () => {
       setProfile(response.data.user);
     } catch (error) {
       console.error('Error fetching profile:', error);
-    }
-  };
-
-  const fetchHotels = async () => {
-    try {
-      const token = localStorage.getItem('token');
-      const response = await axios.get(`${BASE_URL}/api/hotels/my/hotels`, {
-        headers: { Authorization: `Bearer ${token}` }
-      });
-      setHotels(response.data.data);
-    } catch (error) {
-      console.error('Error fetching hotels:', error);
     } finally {
       setLoading(false);
     }
-  };
-
-  const handleChange = (e) => {
-    const value = e.target.type === 'checkbox' ? e.target.checked : e.target.value;
-    setFormData({
-      ...formData,
-      [e.target.name]: value
-    });
   };
 
   const handlePhotoUpload = async (e) => {
@@ -98,74 +60,6 @@ const HotelOwnerDashboard = () => {
       alert('Failed to upload photo');
     } finally {
       setUploadingPhoto(false);
-    }
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      const token = localStorage.getItem('token');
-      const hotelData = {
-        name: formData.name,
-        description: formData.description,
-        category: formData.category,
-        phone: formData.phone,
-        email: formData.email,
-        address: {
-          city: formData['address.city'],
-          district: formData['address.district'],
-          division: formData['address.division']
-        },
-        facilities: {
-          wifi: formData['facilities.wifi'],
-          parking: formData['facilities.parking'],
-          restaurant: formData['facilities.restaurant'],
-          swimmingPool: formData['facilities.swimmingPool'],
-          gym: formData['facilities.gym']
-        }
-      };
-
-      await axios.post(`${BASE_URL}/api/hotels`, hotelData, {
-        headers: { Authorization: `Bearer ${token}` }
-      });
-
-      alert('Hotel added successfully! Pending admin approval.');
-      setShowAddForm(false);
-      fetchHotels();
-      setFormData({
-        name: '',
-        description: '',
-        category: 'hotel',
-        phone: '',
-        email: '',
-        'address.city': '',
-        'address.district': '',
-        'address.division': 'Dhaka',
-        'facilities.wifi': false,
-        'facilities.parking': false,
-        'facilities.restaurant': false,
-        'facilities.swimmingPool': false,
-        'facilities.gym': false
-      });
-    } catch (error) {
-      console.error('Error adding hotel:', error);
-      alert('Failed to add hotel');
-    }
-  };
-
-  const handleDelete = async (hotelId) => {
-    if (!window.confirm('Are you sure you want to delete this hotel?')) return;
-
-    try {
-      const token = localStorage.getItem('token');
-      await axios.delete(`${BASE_URL}/api/hotels/${hotelId}`, {
-        headers: { Authorization: `Bearer ${token}` }
-      });
-      alert('Hotel deleted successfully');
-      fetchHotels();
-    } catch (error) {
-      console.error('Error deleting hotel:', error);
-      alert('Failed to delete hotel');
     }
   };
 

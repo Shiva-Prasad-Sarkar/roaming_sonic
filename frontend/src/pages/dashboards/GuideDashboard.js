@@ -6,7 +6,7 @@ import { userService , BASE_URL } from '../../services/api';
 import axios from 'axios';
 
 const GuideDashboard = () => {
-  const { user, updateUser } = useAuth();
+  const { updateUser } = useAuth();
   const location = useLocation();
   const [profile, setProfile] = useState(null);
   const [loading, setLoading] = useState(true);

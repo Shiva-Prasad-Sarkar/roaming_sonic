@@ -1,4 +1,5 @@
 const User = require('../models/User');
+const { uploadToCloudinary } = require('../config/cloudinary');
 
 // @desc    Get user profile
 // @route   GET /api/users/profile
@@ -79,7 +80,8 @@ exports.uploadPhoto = async (req, res) => {
       });
     }
 
-    const photoUrl = `/uploads/profiles/${req.file.filename}`;
+    const result = await uploadToCloudinary(req.file.buffer, 'roaming-sonic/profiles');
+    const photoUrl = result.secure_url;
 
     const user = await User.findByIdAndUpdate(
       req.user._id,

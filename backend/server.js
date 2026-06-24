@@ -20,6 +20,7 @@ const groupTourRoutes = require('./routes/groupTourRoutes');
 const hotelBookingRoutes = require('./routes/hotelBookingRoutes');
 const complaintRoutes = require('./routes/complaintRoutes');
 const couponRoutes = require('./routes/couponRoutes');
+const seedRoute = require('./routes/seedRoute');
 
 const app = express();
 
@@ -69,6 +70,7 @@ app.use('/api/group-tours', groupTourRoutes);
 app.use('/api/complaints', complaintRoutes);
 app.use('/api/hotel-bookings', hotelBookingRoutes);
 app.use('/api/coupons', couponRoutes);
+app.use('/api/seed', seedRoute);
 
 // Test route
 app.get('/', (req, res) => {

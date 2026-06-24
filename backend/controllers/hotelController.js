@@ -1,5 +1,6 @@
 const Hotel = require('../models/Hotel');
 const User = require('../models/User');
+const { uploadToCloudinary } = require('../config/cloudinary');
 
 // @desc    Create new hotel
 // @route   POST /api/hotels
@@ -42,10 +43,13 @@ exports.createHotel = async (req, res) => {
 
     // Handle uploaded photos
     if (req.files && req.files.length > 0) {
-      hotelData.photos = req.files.map((file, index) => ({
-        url: `/uploads/hotels/${file.filename}`,
-        caption: req.body[`photoCaption${index}`] || '',
-        type: req.body[`photoType${index}`] || 'hotel'
+      hotelData.photos = await Promise.all(req.files.map(async (file, index) => {
+        const result = await uploadToCloudinary(file.buffer, 'roaming-sonic/hotels');
+        return {
+          url: result.secure_url,
+          caption: req.body[`photoCaption${index}`] || '',
+          type: req.body[`photoType${index}`] || 'hotel'
+        };
       }));
     }
 
@@ -216,10 +220,13 @@ exports.updateHotel = async (req, res) => {
 
     // Handle uploaded photos
     if (req.files && req.files.length > 0) {
-      const newPhotos = req.files.map((file, index) => ({
-        url: `/uploads/hotels/${file.filename}`,
-        caption: req.body[`photoCaption${index}`] || '',
-        type: req.body[`photoType${index}`] || 'hotel'
+      const newPhotos = await Promise.all(req.files.map(async (file, index) => {
+        const result = await uploadToCloudinary(file.buffer, 'roaming-sonic/hotels');
+        return {
+          url: result.secure_url,
+          caption: req.body[`photoCaption${index}`] || '',
+          type: req.body[`photoType${index}`] || 'hotel'
+        };
       }));
       
       // If keepExisting is true, merge with existing photos
